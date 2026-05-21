@@ -121,7 +121,8 @@ html, body {
   border-radius: 3px;
 }
 
-#next-btn {
+#next-btn,
+#prev-btn {
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.2);
@@ -136,8 +137,11 @@ html, body {
   transition: all 0.2s ease;
 }
 
-#next-btn:active { transform: scale(0.96); }
-#next-btn.dark {
+#next-btn:active,
+#prev-btn:active { transform: scale(0.96); }
+
+#next-btn.dark,
+#prev-btn.dark {
   background: rgba(44,31,20,0.15);
   border-color: rgba(44,31,20,0.2);
   color: var(--deep);
@@ -219,6 +223,31 @@ html, body {
 .text-dark { color: var(--deep); }
 .text-gold { color: var(--warm-gold); }
 .text-rose { color: var(--rose); }
+
+/* ── STAT ROWS ── */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat-row-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+}
+
+.stat-row-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--warm-gold);
+  text-align: right;
+}
 
 /* ── DIVIDER ── */
 .divider {
