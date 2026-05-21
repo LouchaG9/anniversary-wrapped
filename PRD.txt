@@ -35,7 +35,7 @@ Done. Here's the final PRD:
 | Hikes | "Which was your favourite?" — Opera Hut (Austria, her birthday), Ocean & Sea (Switzerland, engagement hike), Zermatt hike — photo for each | She picks 1 of 3 |
 | Bouldering | Times gone this year — TBD. Hardest grade achieved together: Blue | Static, celebratory |
 | Op Shop Trips | "What was your best find?" — dining table vs. TCM poster frame | She picks 1 of 2 photos |
-| Croissants | Total croissants eaten — Wednesday ritual + travel | Static, fun |
+| Quasos | Total quasos eaten — Wednesday ritual + travel | Static, fun |
 | Dog Walks | Estimated total walks this year — TBD | Slider guess → real number revealed |
 | Dog Parents | Days being dog parents together — TBD | Static, warm |
 
@@ -98,7 +98,7 @@ Done. Here's the final PRD:
 4. **Dog parent days** — estimate TBD
 5. **Car stats** — Mazda details + Subaru servicing cost
 6. **75 Hard dates** — start and finish
-7. **Croissant count** — rough tally
+7. **Quaso count** — rough tally
 8. **Word of the year** — TBD
 9. **Opening line** — you writing or want a draft?
 10. **Closing message** — you writing or want a draft?

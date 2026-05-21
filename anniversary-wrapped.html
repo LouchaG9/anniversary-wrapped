@@ -171,17 +171,34 @@
   </div>
 
   <!-- ═══════════════════════════════════════
-       SLIDE 6 — CROISSANTS
+       SLIDE 6 — QUASOS
   ══════════════════════════════════════════ -->
   <div class="slide bg-gold" data-index="6">
-    <div style="text-align:center; width:100%;">
+    <div style="width:100%; text-align:center;">
       <div class="section-label text-dark anim-1" style="opacity:0.6;">Quality Time</div>
-      <div style="font-size:64px; margin: 8px 0;" class="anim-2">🥐</div>
-      <div class="stat-number text-dark anim-2">[ # ]</div>
-      <div class="stat-label text-dark anim-2">croissants eaten together</div>
-      <div class="divider anim-3" style="background: var(--deep); margin: 20px auto;"></div>
-      <div class="body text-dark anim-3" style="font-size:14px;">
-        Every Wednesday. And honestly,<br/>every country we visited too.
+      <div style="font-size:42px;" class="anim-2">🥐</div>
+      <div class="display-sm text-dark anim-2" style="margin-top:8px;">How many quasos<br/>do you think<br/><em>we ate?</em></div>
+      <div class="anim-3" style="margin-top:24px;">
+        <div class="slider-value" id="quaso-slider-display" style="color: var(--deep);">[ — ]</div>
+        <div class="stat-label text-dark" style="margin-top:0;">quasos</div>
+        <div class="slider-wrap">
+          <div class="slider-track" id="quaso-slider-track">
+            <div class="slider-fill" id="quaso-slider-fill" style="width:50%"></div>
+            <div class="slider-thumb" id="quaso-slider-thumb" style="left:50%"></div>
+          </div>
+          <div class="slider-range-labels">
+            <span style="color:var(--deep);">0</span>
+            <span style="color:var(--deep);">200</span>
+          </div>
+        </div>
+        <button class="reveal-btn" id="quaso-reveal-btn" onclick="revealQuasos()" style="background:var(--deep); color:var(--cream);">
+          Reveal the answer
+        </button>
+        <div class="reveal-result" id="quaso-reveal-result">
+          <div class="stat-number text-dark" style="font-size:72px;">[ # ]</div>
+          <div class="stat-label text-dark">actual quasos together</div>
+          <div class="body text-dark" style="margin-top:12px; font-size:13px; opacity:0.65;" id="quaso-reveal-message"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -518,6 +535,7 @@
 
 <!-- ── NAVIGATION BAR ── -->
 <div id="nav">
+  <button id="prev-btn" onclick="goToSlide(current - 1)">← Back</button>
   <div id="progress-dots"></div>
   <button id="next-btn" onclick="nextSlide()">Next →</button>
 </div>

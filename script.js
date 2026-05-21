@@ -1,10 +1,12 @@
 const TOTAL_SLIDES = 24;
-const ACTUAL_WALKS = 0; // Replace with your number
+const ACTUAL_WALKS = 0;  // Replace with your number
+const ACTUAL_QUASOS = 0; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
 
 let current = 0;
-let sliderValue = 400;
-let revealed = false;
+
+// Hide prev on first load (starts on slide 0)
+document.getElementById('prev-btn').style.display = 'none';
 
 // ── BUILD PROGRESS DOTS ──
 const dotsEl = document.getElementById('progress-dots');
@@ -35,17 +37,17 @@ function goToSlide(index) {
 
   current = index;
 
-  // Update next button style based on slide bg
-  const btn = document.getElementById('next-btn');
+  // Update button styles based on slide bg
+  const nextBtn = document.getElementById('next-btn');
+  const prevBtn = document.getElementById('prev-btn');
   const lightSlides = [0, 6, 8, 13, 14, 19];
-  if (lightSlides.includes(current)) {
-    btn.classList.add('dark');
-  } else {
-    btn.classList.remove('dark');
-  }
+  [nextBtn, prevBtn].forEach(btn => {
+    btn.classList.toggle('dark', lightSlides.includes(current));
+  });
 
-  // Hide next on final slide
-  btn.style.display = current === TOTAL_SLIDES - 1 ? 'none' : '';
+  // Hide next on final slide, hide prev on first slide
+  nextBtn.style.display = current === TOTAL_SLIDES - 1 ? 'none' : '';
+  prevBtn.style.display = current === 0 ? 'none' : '';
 
   // Special actions
   if (index === 22) triggerConfetti();
@@ -75,66 +77,91 @@ function selectCard(groupId, card) {
   card.classList.add('selected');
 }
 
-// ── INTERACTIVE: SLIDER ──
-const track = document.getElementById('slider-track');
-const thumb = document.getElementById('slider-thumb');
-const fill = document.getElementById('slider-fill');
-const display = document.getElementById('slider-display');
+// ── SLIDER FACTORY ──
+function createSlider({ max, actual, trackId, thumbId, fillId, displayId, revealBtnId, revealResultId, revealMessageId, closeMsg, nearMsg, nearThreshold, fillColor }) {
+  const track = document.getElementById(trackId);
+  const thumb = document.getElementById(thumbId);
+  const fill  = document.getElementById(fillId);
+  const disp  = document.getElementById(displayId);
 
-const MIN_WALKS = 0;
-const MAX_WALKS = 800;
+  if (fillColor) fill.style.background = fillColor;
 
-function updateSlider(pct) {
-  pct = Math.max(0, Math.min(1, pct));
-  const val = Math.round(pct * MAX_WALKS);
-  sliderValue = val;
-  fill.style.width = (pct * 100) + '%';
-  thumb.style.left = (pct * 100) + '%';
-  display.textContent = val;
-}
+  let value    = 0;
+  let dragging = false;
 
-// Initialize slider
-updateSlider(0.5);
-
-function getSliderPct(e, el) {
-  const rect = el.getBoundingClientRect();
-  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-  return (clientX - rect.left) / rect.width;
-}
-
-let dragging = false;
-
-thumb.addEventListener('mousedown', () => dragging = true);
-thumb.addEventListener('touchstart', () => dragging = true, {passive: true});
-track.addEventListener('click', (e) => updateSlider(getSliderPct(e, track)));
-
-document.addEventListener('mousemove', (e) => {
-  if (dragging) updateSlider(getSliderPct(e, track));
-});
-document.addEventListener('touchmove', (e) => {
-  if (dragging) updateSlider(getSliderPct(e.touches[0], track));
-}, {passive: true});
-document.addEventListener('mouseup', () => dragging = false);
-document.addEventListener('touchend', () => dragging = false);
-
-function revealWalks() {
-  revealed = true;
-  document.getElementById('reveal-btn').style.display = 'none';
-  const result = document.getElementById('reveal-result');
-  result.classList.add('show');
-  const diff = Math.abs(sliderValue - ACTUAL_WALKS);
-  let msg = '';
-  if (ACTUAL_WALKS === 0) {
-    msg = 'Update this with the real number!';
-  } else if (diff < 20) {
-    msg = 'Incredibly close. You really do know us. 🎯';
-  } else if (diff < 80) {
-    msg = 'Pretty close! You know us well. 🐾';
-  } else {
-    msg = `You guessed ${sliderValue}. The real answer might surprise you.`;
+  function update(pct) {
+    pct = Math.max(0, Math.min(1, pct));
+    value = Math.round(pct * max);
+    fill.style.width = (pct * 100) + '%';
+    thumb.style.left = (pct * 100) + '%';
+    disp.textContent = value;
   }
-  document.getElementById('reveal-message').textContent = msg;
+
+  function pctFromEvent(e) {
+    const rect    = track.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return (clientX - rect.left) / rect.width;
+  }
+
+  update(0.5);
+
+  thumb.addEventListener('mousedown',  ()  => dragging = true);
+  thumb.addEventListener('touchstart', ()  => dragging = true, { passive: true });
+  track.addEventListener('click',      (e) => update(pctFromEvent(e)));
+
+  document.addEventListener('mousemove',  (e) => { if (dragging) update(pctFromEvent(e)); });
+  document.addEventListener('touchmove',  (e) => { if (dragging) update(pctFromEvent(e.touches[0])); }, { passive: true });
+  document.addEventListener('mouseup',    ()  => dragging = false);
+  document.addEventListener('touchend',   ()  => dragging = false);
+
+  function reveal() {
+    document.getElementById(revealBtnId).style.display = 'none';
+    document.getElementById(revealResultId).classList.add('show');
+    const diff = Math.abs(value - actual);
+    let msg;
+    if (actual === 0)                       msg = 'Update this with the real number!';
+    else if (diff <= 5)                     msg = closeMsg || 'Incredibly close. You really do know us. 🎯';
+    else if (diff <= (nearThreshold || 20)) msg = nearMsg  || 'Pretty close! You know us well.';
+    else                                    msg = `You guessed ${value}. The real answer might surprise you.`;
+    document.getElementById(revealMessageId).textContent = msg;
+  }
+
+  return { reveal };
 }
+
+const walksSlider = createSlider({
+  max:             800,
+  actual:          ACTUAL_WALKS,
+  trackId:         'slider-track',
+  thumbId:         'slider-thumb',
+  fillId:          'slider-fill',
+  displayId:       'slider-display',
+  revealBtnId:     'reveal-btn',
+  revealResultId:  'reveal-result',
+  revealMessageId: 'reveal-message',
+  nearThreshold:   80,
+  closeMsg:        'Incredibly close. You really do know us. 🎯',
+  nearMsg:         'Pretty close! You know us well. 🐾',
+});
+
+const quasoSlider = createSlider({
+  max:             200,
+  actual:          ACTUAL_QUASOS,
+  trackId:         'quaso-slider-track',
+  thumbId:         'quaso-slider-thumb',
+  fillId:          'quaso-slider-fill',
+  displayId:       'quaso-slider-display',
+  revealBtnId:     'quaso-reveal-btn',
+  revealResultId:  'quaso-reveal-result',
+  revealMessageId: 'quaso-reveal-message',
+  nearThreshold:   10,
+  closeMsg:        'Incredibly close. You really do know us. 🎯',
+  nearMsg:         'Pretty close! You know us well. 🥐',
+  fillColor:       'var(--deep)',
+});
+
+function revealWalks()  { walksSlider.reveal(); }
+function revealQuasos() { quasoSlider.reveal(); }
 
 // ── 75 HARD GRID ──
 function buildHardGrid() {

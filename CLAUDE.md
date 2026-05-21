@@ -17,16 +17,16 @@ Everything lives in `anniversary-wrapped.html`:
 - **CSS** (`:root` CSS variables → component styles → slide-specific styles) — warm palette: `--cream`, `--blush`, `--rose`, `--warm-gold`, `--deep`, `--soft-brown`
 - **Slide HTML** — 24 slides (index 0–23), each a `<div class="slide" data-index="N">`. Slides are positioned `absolute`, with opacity/transform transitions driving the enter/exit animations. The `active` class shows a slide; `exit` triggers the out-animation.
 - **JavaScript** — inline, no framework. Key globals:
-  - `ACTUAL_WALKS` and `ENGAGEMENT_DATE` — fill-in constants at the top of the `<script>`
+  - `ACTUAL_WALKS`, `ACTUAL_QUASOS`, and `ENGAGEMENT_DATE` — fill-in constants at the top of `script.js`
   - `goToSlide(index)` — central navigation function; handles dot updates, button styling, and side-effects for special slides (confetti on 22, counter on 23, 75 Hard grid on 12)
   - `selectCard(groupId, card)` — drives the pick-card interactive mechanic (hikes slide 3, op shop slide 5)
-  - Slider mechanic (slide 7) — mouse/touch drag on `#slider-thumb` or click on `#slider-track`, reveals answer via `revealWalks()`
+  - `createSlider(config)` — factory function; powers the guess-slider mechanic on slide 6 (quasos) and slide 7 (dog walks)
   - `triggerConfetti()` — appends short-lived DOM elements animated with `confettiFall` keyframes
   - `updateDaysCounter()` — live count of days since `ENGAGEMENT_DATE`
 
 ## Open Items / Placeholders
 
-All `[ # ]` and `[ word ]` placeholders in the HTML need real values before gifting. See `PRD.txt` for the full list of open items (bouldering sessions, dog walk count, dog parent days, car servicing cost, 75 Hard dates, croissant count, word of the year, opening line, closing message, and all photos).
+All `[ # ]` and `[ word ]` placeholders in the HTML need real values before gifting. See `PRD.txt` for the full list of open items (bouldering sessions, dog walk count, dog parent days, car servicing cost, 75 Hard dates, quaso count, word of the year, opening line, closing message, and all photos).
 
 Photo slots are `<div class="photo-slot">` with a `.photo-label` placeholder — replace the `<div>` with an `<img>` tag pointing to the photo file.
 
