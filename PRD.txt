@@ -1,0 +1,109 @@
+Done. Here's the final PRD:
+
+---
+
+## 📋 PRD: Anniversary Wrapped — v3 (Final)
+
+**Product:** A mobile-first, slide-by-slide interactive web experience gifted to a partner on an 11th anniversary. Spotify Wrapped meets a personal love letter — warm, romantic, photo-rich, and partially interactive.
+
+---
+
+### Design Principles
+- **Mobile-first**, full-screen slides, tap to advance
+- **Warm and romantic** palette — creams, blush, warm gold
+- **Photo-forward** — photos are a feature, not decoration
+- **Interactive moments** — she picks, guesses, and builds alongside the experience
+- **Playful but heartfelt** — humour in the hard stuff, sincerity in the big stuff
+
+---
+
+### Slide Structure
+
+**0 — Title Slide**
+- Opening line from you — one sentence, sets the tone
+- "11 Years of Us" 
+- Hero photo
+
+---
+
+**SECTION 1: Quality Time**
+
+| Slide | Content | Interaction |
+|---|---|---|
+| Section card | "Quality Time" header | None |
+| NYT Games | Longest Wordle streak: 103 days. Favourite: Spelling Bee | Static |
+| Hikes | "Which was your favourite?" — Opera Hut (Austria, her birthday), Ocean & Sea (Switzerland, engagement hike), Zermatt hike — photo for each | She picks 1 of 3 |
+| Bouldering | Times gone this year — TBD. Hardest grade achieved together: Blue | Static, celebratory |
+| Op Shop Trips | "What was your best find?" — dining table vs. TCM poster frame | She picks 1 of 2 photos |
+| Croissants | Total croissants eaten — Wednesday ritual + travel | Static, fun |
+| Dog Walks | Estimated total walks this year — TBD | Slider guess → real number revealed |
+| Dog Parents | Days being dog parents together — TBD | Static, warm |
+
+---
+
+**SECTION 2: Challenges**
+
+| Slide | Content | Interaction |
+|---|---|---|
+| Section card | "Challenges" header | None |
+| Uni/Study | "Too f***ing many" — joke badge | Static, humorous |
+| Car Troubles | Mazda (breakdown ✓, crash ✓) vs Subaru (0, 0 — but servicing $$$) | Static, humorous |
+| 75 Hard | Completed together ✓ — dates TBD, asterisk for rule-bending, best habit emerged: yoga | Static, celebratory |
+| Veganism | Another year of veganism together | Static, milestone |
+
+---
+
+**SECTION 3: Travel**
+
+| Slide | Content | Interaction |
+|---|---|---|
+| Section card | "Travel" header | None |
+| Countries Visited | Italy, Switzerland, Austria, Germany, Slovenia, Ireland, France, Japan — 8 countries | Static — map or card stack |
+| Coming Soon | New Zealand — booked, not yet visited | Static, teaser |
+
+---
+
+**SECTION 4: Highlights**
+
+| Slide | Content | Interaction |
+|---|---|---|
+| Section card | "Highlights" header | None |
+| Showed Up For Each Other | "Every single day" — give this its own slide, centred, simple | Static, sincere |
+| Turning 31 | Both turned 31 — a photo each | Static, warm |
+| Word of the Year | TBD | Static, reflective |
+| Engagement 💍 | September 15, 2025 — drum roll reveal, multiple photos | Static, cinematic |
+
+---
+
+**Final Slide**
+- Closing message from you
+- Live "days since engagement" counter
+- "Year 12 →" teaser
+
+---
+
+### Interactive Mechanics Summary
+| Mechanic | Slide | Type |
+|---|---|---|
+| Pick your favourite hike | Hikes | Tap 1 of 3 photo cards |
+| Pick your best op shop find | Op Shop | Tap 1 of 2 photos |
+| Guess the dog walks | Dog Walks | Drag slider → reveal |
+
+---
+
+### Open Items
+1. **Zermatt hike** — confirm exact trail name
+2. **Bouldering** — number of sessions this year
+3. **Dog walk estimate** — your calc
+4. **Dog parent days** — estimate TBD
+5. **Car stats** — Mazda details + Subaru servicing cost
+6. **75 Hard dates** — start and finish
+7. **Croissant count** — rough tally
+8. **Word of the year** — TBD
+9. **Opening line** — you writing or want a draft?
+10. **Closing message** — you writing or want a draft?
+11. **Photos** — hikes, op shop finds, turning 31, engagement
+
+---
+
+That's a tight, well-structured experience. Good call dropping the travel quiz — it now flows as a pure reveal which will hit harder. Ready to build?
