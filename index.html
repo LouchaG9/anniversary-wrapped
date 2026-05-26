@@ -6,6 +6,7 @@
 <title>11 Years of Us</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
 
@@ -81,7 +82,7 @@
           <div class="photo-label">[ Opera Hut photo ]</div>
         </div>
         <div class="pick-card-inner" style="background: rgba(255,255,255,0.06);">
-          <div class="pick-emoji">🏔️</div>
+          <div class="pick-emoji"><i data-lucide="mountain" style="width:28px;height:28px;"></i></div>
           <div>
             <div class="pick-card-label text-cream">Opera Hut</div>
             <div class="pick-card-sub text-cream">Austria · Your birthday</div>
@@ -94,7 +95,7 @@
           <div class="photo-label">[ Ocean & Sea photo ]</div>
         </div>
         <div class="pick-card-inner" style="background: rgba(255,255,255,0.06);">
-          <div class="pick-emoji">🌊</div>
+          <div class="pick-emoji"><i data-lucide="waves" style="width:28px;height:28px;"></i></div>
           <div>
             <div class="pick-card-label text-cream">Ocean & Sea</div>
             <div class="pick-card-sub text-cream">Switzerland · The engagement hike</div>
@@ -107,7 +108,7 @@
           <div class="photo-label">[ Zermatt photo ]</div>
         </div>
         <div class="pick-card-inner" style="background: rgba(255,255,255,0.06);">
-          <div class="pick-emoji">⛰️</div>
+          <div class="pick-emoji"><i data-lucide="mountain-snow" style="width:28px;height:28px;"></i></div>
           <div>
             <div class="pick-card-label text-cream">Zermatt Trail</div>
             <div class="pick-card-sub text-cream">Switzerland · The big one</div>
@@ -133,7 +134,7 @@
         </div>
         <div style="width:1px; background:rgba(255,255,255,0.2); margin: 8px 0;"></div>
         <div style="text-align:center;">
-          <div class="stat-number text-cream" style="font-size:64px;">🔵</div>
+          <div class="stat-number text-cream" style="font-size:64px;"><i data-lucide="circle" style="width:64px;height:64px;fill:#4a90d9;stroke:none;"></i></div>
           <div class="stat-label text-cream">hardest grade together</div>
         </div>
       </div>
@@ -211,61 +212,36 @@
   </div>
 
   <!-- ═══════════════════════════════════════
-       SLIDE 7 — DOG WALKS (SLIDER)
+       SLIDE 7 — DOG (WALKS + DOG PARENTS)
   ══════════════════════════════════════════ -->
-  <div class="slide bg-blush" data-index="7">
-    <div style="width:100%; text-align:center;">
-      <div class="section-label text-dark anim-1" style="opacity:0.5;">Quality Time</div>
-      <div style="font-size:42px;" class="anim-2">🐾</div>
-      <div class="display-sm text-dark anim-2" style="margin-top:8px;">How many walks<br/>do you think<br/><em>we did?</em></div>
-      <div class="anim-3" style="margin-top:24px;">
-        <div class="slider-value" id="slider-display" style="color: var(--deep);">[ — ]</div>
-        <div class="stat-label text-dark" style="margin-top:0;">walks</div>
-        <div class="slider-wrap">
-          <div class="slider-track" id="slider-track">
-            <div class="slider-fill" id="slider-fill" style="width:50%"></div>
-            <div class="slider-thumb" id="slider-thumb" style="left:50%"></div>
-          </div>
-          <div class="slider-range-labels">
-            <span style="color:var(--deep);">0</span>
-            <span style="color:var(--deep);">800</span>
-          </div>
+  <div class="slide" data-index="7" style="background-image: url(''); background-size: cover; background-position: center; background-color: var(--blush);">
+    <div class="hero-overlay"></div>
+    <div style="text-align:center; width:100%; position:relative; z-index:2;">
+      <div class="section-label text-cream anim-1" style="opacity:0.7;">Quality Time</div>
+      <div class="anim-2"><i data-lucide="paw-print" style="width:42px;height:42px;"></i></div>
+      <div class="display-sm text-cream anim-2" style="margin-top:8px;">Apollo.</div>
+      <div class="divider anim-3" style="background:rgba(255,255,255,0.3); margin: 20px auto;"></div>
+      <div class="anim-3" style="display:flex; gap:24px; justify-content:center; align-items:center;">
+        <div style="text-align:center;">
+          <div class="stat-number text-cream" style="font-size:72px;">285</div>
+          <div class="stat-label text-cream">walks together</div>
         </div>
-        <button class="reveal-btn" id="reveal-btn" onclick="revealWalks()" style="background:var(--deep); color:var(--cream);">
-          Reveal the answer
-        </button>
-        <div class="reveal-result" id="reveal-result">
-          <div class="stat-number text-dark" style="font-size:72px;">[ # ]</div>
-          <div class="stat-label text-dark">actual walks together</div>
-          <div class="body text-dark" style="margin-top:12px; font-size:13px; opacity:0.65;" id="reveal-message"></div>
+        <div style="width:1px; background:rgba(255,255,255,0.3); height:60px;"></div>
+        <div style="text-align:center;">
+          <div class="stat-number text-cream" style="font-size:72px;">365</div>
+          <div class="stat-label text-cream">days as dog parents</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       SLIDE 8 — DOG PARENT DAYS
-  ══════════════════════════════════════════ -->
-  <div class="slide bg-cream" data-index="8">
-    <div style="text-align:center; width:100%;">
-      <div class="section-label text-dark anim-1" style="opacity:0.5;">Quality Time</div>
-      <div style="font-size:52px;" class="anim-2">🐶</div>
-      <div class="stat-number text-dark anim-2" style="margin-top:8px;">[ # ]</div>
-      <div class="stat-label text-dark anim-2">days as dog parents</div>
-      <div class="divider-gold anim-3" style="margin: 20px auto;"></div>
-      <div class="italic text-dark anim-3" style="color: var(--soft-brown);">
+      <div class="italic text-cream anim-4" style="margin-top:20px; opacity:0.85;">
         Best thing we ever did.
       </div>
-    </div>
-    <div class="photo-slot photo-hero anim-4" style="width:100%; margin-top:24px;">
-      <div class="photo-label text-dark">[ dog photo ]</div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════
        SLIDE 9 — SECTION: CHALLENGES
   ══════════════════════════════════════════ -->
-  <div class="slide bg-dark" data-index="9">
+  <div class="slide bg-dark" data-index="8">
     <div class="section-div-number">2</div>
     <div style="width:100%;">
       <div class="section-label text-cream anim-1" style="opacity:0.5;">Section Two</div>
@@ -278,42 +254,42 @@
   <!-- ═══════════════════════════════════════
        SLIDE 10 — UNI / STUDY
   ══════════════════════════════════════════ -->
-  <div class="slide bg-dark" data-index="10">
+  <div class="slide bg-dark" data-index="9">
     <div style="text-align:center; width:100%;">
       <div class="section-label text-cream anim-1">Challenges</div>
-      <div style="font-size:52px;" class="anim-2">📚</div>
+      <div class="anim-2"><i data-lucide="book-open" style="width:52px;height:52px;"></i></div>
       <div class="display text-cream anim-2" style="margin-top:12px; font-size:48px;">Too f***ing<br/>many.</div>
       <div class="divider anim-3" style="background:rgba(255,255,255,0.3); margin: 20px auto;"></div>
       <div class="body text-cream anim-3" style="opacity:0.6; font-size:13px;">
         Assignments submitted. References written.<br/>Survived anyway.
       </div>
-      <div class="pill anim-4" style="margin-top:16px;">🎓 Still standing</div>
+      <div class="pill anim-4" style="margin-top:16px;"><i data-lucide="graduation-cap" style="width:16px;height:16px;vertical-align:middle;"></i> Still standing</div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════
        SLIDE 11 — CAR TROUBLES
   ══════════════════════════════════════════ -->
-  <div class="slide bg-dark" data-index="11" style="justify-content:flex-start; padding-top:52px;">
+  <div class="slide bg-dark" data-index="10" style="justify-content:flex-start; padding-top:52px;">
     <div style="width:100%; margin-bottom:16px;">
       <div class="section-label text-cream anim-1">Challenges</div>
-      <div class="display-sm text-cream anim-2">The Year<br/>in <em>Cars</em> 🚗</div>
+      <div class="display-sm text-cream anim-2">The Year<br/>in <em>Cars</em> <i data-lucide="car" style="width:28px;height:28px;vertical-align:middle;"></i></div>
     </div>
     <div class="anim-3" style="width:100%;">
       <div class="car-card">
         <div class="car-name">Mazda</div>
         <div class="car-stats">
-          <div class="car-stat">💥 1 breakdown</div>
-          <div class="car-stat">🫣 1 crash</div>
-          <div class="car-stat">😬 RIP</div>
+          <div class="car-stat"><i data-lucide="zap" style="width:16px;height:16px;vertical-align:middle;"></i> 1 breakdown</div>
+          <div class="car-stat"><i data-lucide="eye-off" style="width:16px;height:16px;vertical-align:middle;"></i> 1 crash</div>
+          <div class="car-stat"><i data-lucide="alert-circle" style="width:16px;height:16px;vertical-align:middle;"></i> RIP</div>
         </div>
       </div>
       <div class="car-card">
         <div class="car-name">Subaru</div>
         <div class="car-stats">
-          <div class="car-stat">✅ 0 breakdowns</div>
-          <div class="car-stat">✅ 0 crashes</div>
-          <div class="car-stat">💸 $[ # ] servicing</div>
+          <div class="car-stat"><i data-lucide="circle-check" style="width:16px;height:16px;vertical-align:middle;"></i> 0 breakdowns</div>
+          <div class="car-stat"><i data-lucide="circle-check" style="width:16px;height:16px;vertical-align:middle;"></i> 0 crashes</div>
+          <div class="car-stat"><i data-lucide="banknote" style="width:16px;height:16px;vertical-align:middle;"></i> $[ # ] servicing</div>
         </div>
       </div>
       <div class="body text-cream" style="font-size:12px; opacity:0.45; text-align:center; margin-top:8px;">
@@ -325,23 +301,23 @@
   <!-- ═══════════════════════════════════════
        SLIDE 12 — 75 HARD
   ══════════════════════════════════════════ -->
-  <div class="slide bg-rose" data-index="12">
+  <div class="slide bg-rose" data-index="11">
     <div style="text-align:center; width:100%;">
       <div class="section-label text-cream anim-1">Challenges</div>
       <div class="display text-cream anim-2" style="font-size:44px;">75 Hard.<br/>Done. ✓</div>
-      <div class="body text-cream anim-3" style="font-size:11px; opacity:0.55; margin: 10px 0 4px;">2 Feb → 18 Apr 2026</div>
+      <div class="body text-cream anim-3" style="font-size:11px; opacity:0.55; margin: 10px 0 4px;">2 Feb ✅18 Apr 2026</div>
       <div class="check-grid anim-3" id="hard-grid"></div>
       <div class="pill anim-4" style="margin: 8px auto;">*with some creative rule interpretation</div>
       <div class="divider anim-4" style="background:rgba(255,255,255,0.3); margin: 8px auto;"></div>
       <div class="anim-5" style="display:grid; grid-template-columns:1fr 1fr; gap:5px 16px; text-align:left; width:100%;">
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ No alcohol</div>
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ Delete social media</div>
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ No soft-drink</div>
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ Yoga every day</div>
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ Climbing twice a week</div>
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ Walk Apollo every day</div>
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ No buying coffee</div>
-        <div class="body text-cream" style="font-size:12px; opacity:0.8;">→ Home cooked meals only</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> No alcohol</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> Delete social media</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> No soft-drink</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> Yoga every day</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> Climbing twice a week</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> Walk Apollo every day</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> No buying coffee</div>
+        <div class="body text-cream" style="font-size:12px; opacity:0.8;"><i data-lucide="circle-check" style="width:14px;height:14px;vertical-align:middle;"></i> Home cooked meals only</div>
       </div>
     </div>
   </div>
@@ -349,10 +325,10 @@
   <!-- ═══════════════════════════════════════
        SLIDE 13 — VEGANISM
   ══════════════════════════════════════════ -->
-  <div class="slide" data-index="13" style="background: linear-gradient(160deg, #c8e6c4 0%, #dff0d0 45%, #f0f7e6 100%)">
+  <div class="slide" data-index="12" style="background: linear-gradient(160deg, #c8e6c4 0%, #dff0d0 45%, #f0f7e6 100%)">
     <div style="text-align:center; width:100%;">
       <div class="section-label text-dark anim-1" style="opacity:0.5;">Challenges</div>
-      <div style="font-size:52px;" class="anim-2">🌱</div>
+      <div class="anim-2"><i data-lucide="sprout" style="width:52px;height:52px;"></i></div>
       <div class="display text-dark anim-2" style="margin-top:12px; font-size:44px;">Another year<br/>as vegans.</div>
       <div class="divider-gold anim-3" style="margin: 20px auto;"></div>
       <div class="body text-dark anim-3" style="opacity:0.6;">
@@ -364,7 +340,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 14 — SECTION: TRAVEL
   ══════════════════════════════════════════ -->
-  <div class="slide bg-blush" data-index="14">
+  <div class="slide bg-blush" data-index="13">
     <div class="section-div-number">3</div>
     <div style="width:100%;">
       <div class="section-label text-dark anim-1" style="opacity:0.5;">Section Three</div>
@@ -377,7 +353,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 15 — COUNTRIES
   ══════════════════════════════════════════ -->
-  <div class="slide bg-dark" data-index="15">
+  <div class="slide bg-dark" data-index="14">
     <div style="width:100%; margin-bottom:16px;">
       <div class="section-label text-cream anim-1">Travel</div>
       <div class="display-sm text-cream anim-2">Everywhere<br/>we went.</div>
@@ -400,7 +376,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 16 — NEW ZEALAND TEASER
   ══════════════════════════════════════════ -->
-  <div class="slide bg-gold" data-index="16">
+  <div class="slide bg-gold" data-index="15">
     <div style="text-align:center; width:100%;">
       <div class="section-label text-dark anim-1" style="opacity:0.6;">Travel · Coming Soon</div>
       <div style="font-size:64px;" class="anim-2">🇳🇿</div>
@@ -409,14 +385,14 @@
       <div class="body text-dark anim-3">
         Booked. On the way.
       </div>
-      <div class="pill pill-dark anim-4" style="margin-top:16px; display:inline-flex;">✈️ Already booked</div>
+      <div class="pill pill-dark anim-4" style="margin-top:16px; display:inline-flex;"><i data-lucide="plane" style="width:16px;height:16px;vertical-align:middle;"></i> Already booked</div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════
        SLIDE 17 — SECTION: HIGHLIGHTS
   ══════════════════════════════════════════ -->
-  <div class="slide bg-dark" data-index="17">
+  <div class="slide bg-dark" data-index="16">
     <div class="section-div-number">4</div>
     <div style="width:100%;">
       <div class="section-label text-cream anim-1" style="opacity:0.5;">Section Four</div>
@@ -429,7 +405,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 18 — SHOWED UP
   ══════════════════════════════════════════ -->
-  <div class="slide bg-cream" data-index="18">
+  <div class="slide bg-cream" data-index="17">
     <div style="text-align:center; width:100%; padding: 0 10px;">
       <div class="section-label text-dark anim-1" style="opacity:0.5;">Highlights</div>
       <div class="display text-dark anim-2" style="margin-top:16px; font-size:42px; line-height:1.2;">
@@ -449,7 +425,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 19 — TURNING 31
   ══════════════════════════════════════════ -->
-  <div class="slide bg-blush" data-index="19">
+  <div class="slide bg-blush" data-index="18">
     <div style="width:100%;">
       <div class="section-label text-dark anim-1" style="opacity:0.5;">Highlights</div>
       <div class="display-sm text-dark anim-2">We both<br/>turned <em>31.</em></div>
@@ -475,7 +451,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 20 — WORD OF THE YEAR
   ══════════════════════════════════════════ -->
-  <div class="slide bg-dark" data-index="20">
+  <div class="slide bg-dark" data-index="19">
     <div style="text-align:center; width:100%;">
       <div class="section-label text-cream anim-1">Highlights</div>
       <div class="body text-cream anim-2" style="opacity:0.6; margin: 16px 0 24px;">If I had to sum up our year<br/>in one word, it would be</div>
@@ -490,7 +466,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 21 — ENGAGEMENT BUILD UP
   ══════════════════════════════════════════ -->
-  <div class="slide bg-engagement" data-index="21">
+  <div class="slide bg-engagement" data-index="20">
     <div style="text-align:center; width:100%;">
       <div class="section-label text-cream anim-1" style="opacity:0.4; color:var(--warm-gold);">Highlights</div>
       <div class="body text-cream anim-2" style="opacity:0.5; margin: 20px 0 12px; font-size:14px; letter-spacing:0.08em;">
@@ -505,11 +481,11 @@
   <!-- ═══════════════════════════════════════
        SLIDE 22 — ENGAGEMENT
   ══════════════════════════════════════════ -->
-  <div class="slide bg-engagement" data-index="22" id="engagement-slide" style="justify-content:flex-start; padding-top:48px;">
+  <div class="slide bg-engagement" data-index="21" id="engagement-slide" style="justify-content:flex-start; padding-top:48px;">
     <div style="width:100%; text-align:center;" class="anim-1">
       <div class="engagement-date">September 15, 2025</div>
       <div class="display text-cream" style="font-size:48px; line-height:1.1;">
-        We got<br/><em style="color:var(--warm-gold);">engaged.</em> 💍
+        We got<br/><em style="color:var(--warm-gold);">engaged.</em> <i data-lucide="gem" style="width:28px;height:28px;vertical-align:middle;color:var(--warm-gold);"></i>
       </div>
     </div>
     <div class="engagement-photos anim-2">
@@ -528,7 +504,7 @@
   <!-- ═══════════════════════════════════════
        SLIDE 23 — FINAL
   ══════════════════════════════════════════ -->
-  <div class="slide bg-engagement" data-index="23" id="final-slide">
+  <div class="slide bg-engagement" data-index="22" id="final-slide">
     <div style="text-align:center; width:100%;">
       <div class="title-ornament anim-1" style="color:var(--warm-gold); opacity:0.7;">Year 11, wrapped.</div>
       <div class="divider anim-2" style="background:var(--warm-gold); opacity:0.3; margin: 20px auto;"></div>

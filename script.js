@@ -1,6 +1,6 @@
-const TOTAL_SLIDES = 24;
-const ACTUAL_WALKS = 0;  // Replace with your number
-const ACTUAL_QUASOS = 0; // Replace with your number
+const TOTAL_SLIDES = 23;
+const ACTUAL_WALKS = 285;
+const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
 
 let current = 0;
@@ -35,9 +35,9 @@ function goToSlide(index) {
   current = index;
 
   // Special actions
-  if (index === 22) triggerConfetti();
-  if (index === 23) updateDaysCounter();
-  if (index === 12) buildHardGrid();
+  if (index === 21) triggerConfetti();
+  if (index === 22) updateDaysCounter();
+  if (index === 11) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
 }
 
 function nextSlide() {
@@ -65,7 +65,7 @@ function selectCard(groupId, card) {
 }
 
 // ── SLIDER FACTORY ──
-function createSlider({ max, actual, trackId, thumbId, fillId, displayId, revealBtnId, revealResultId, revealMessageId, closeMsg, nearMsg, nearThreshold, fillColor }) {
+function createSlider({ max, actual, trackId, thumbId, fillId, displayId, revealBtnId, revealResultId, revealMessageId, closeMsg, underMsg, overMsg, fillColor }) {
   const track = document.getElementById(trackId);
   const thumb = document.getElementById(thumbId);
   const fill  = document.getElementById(fillId);
@@ -103,33 +103,20 @@ function createSlider({ max, actual, trackId, thumbId, fillId, displayId, reveal
 
   function reveal() {
     document.getElementById(revealBtnId).style.display = 'none';
-    document.getElementById(revealResultId).classList.add('show');
+    const resultEl = document.getElementById(revealResultId);
+    resultEl.classList.add('show');
+    resultEl.querySelector('.stat-number').textContent = actual;
     const diff = Math.abs(value - actual);
     let msg;
-    if (actual === 0)                       msg = 'Update this with the real number!';
-    else if (diff <= 5)                     msg = closeMsg || 'Incredibly close. You really do know us. 🎯';
-    else if (diff <= (nearThreshold || 20)) msg = nearMsg  || 'Pretty close! You know us well.';
-    else                                    msg = `You guessed ${value}. The real answer might surprise you.`;
+    if (actual === 0)        msg = 'Update this with the real number!';
+    else if (diff <= 5)      msg = closeMsg || 'Incredibly close!';
+    else if (value < actual) msg = underMsg ? underMsg.replace('{v}', value) : `You guessed ${value}. The real answer might surprise you.`;
+    else                     msg = overMsg  || `You guessed ${value}. The real answer might surprise you.`;
     document.getElementById(revealMessageId).textContent = msg;
   }
 
   return { reveal };
 }
-
-const walksSlider = createSlider({
-  max:             800,
-  actual:          ACTUAL_WALKS,
-  trackId:         'slider-track',
-  thumbId:         'slider-thumb',
-  fillId:          'slider-fill',
-  displayId:       'slider-display',
-  revealBtnId:     'reveal-btn',
-  revealResultId:  'reveal-result',
-  revealMessageId: 'reveal-message',
-  nearThreshold:   80,
-  closeMsg:        'Incredibly close. You really do know us. 🎯',
-  nearMsg:         'Pretty close! You know us well. 🐾',
-});
 
 const quasoSlider = createSlider({
   max:             200,
@@ -141,13 +128,12 @@ const quasoSlider = createSlider({
   revealBtnId:     'quaso-reveal-btn',
   revealResultId:  'quaso-reveal-result',
   revealMessageId: 'quaso-reveal-message',
-  nearThreshold:   10,
-  closeMsg:        'Incredibly close. You really do know us. 🎯',
-  nearMsg:         'Pretty close! You know us well. 🥐',
+  closeMsg:        'Wow. Your brain must be the shape of a croissant.',
+  underMsg:        'You guessed {v}. Do you really think we only ate that many?',
+  overMsg:         'This looks more like how many croissants you wished we ate.',
   fillColor:       'var(--deep)',
 });
 
-function revealWalks()  { walksSlider.reveal(); }
 function revealQuasos() { quasoSlider.reveal(); }
 
 // ── 75 HARD GRID ──
@@ -177,7 +163,10 @@ function buildHardGrid() {
       const cell = document.createElement('div');
       if (i >= startDay && i <= endDay) {
         cell.className = 'check-cell done';
-        cell.textContent = '✅';
+        const icon = document.createElement('i');
+        icon.setAttribute('data-lucide', 'check');
+        icon.style.cssText = 'width:12px;height:12px;';
+        cell.appendChild(icon);
       } else {
         cell.className = 'check-cell empty';
       }
@@ -215,6 +204,21 @@ function updateDaysCounter() {
   const diff = Math.floor((now - ENGAGEMENT_DATE) / (1000 * 60 * 60 * 24));
   document.getElementById('days-counter').textContent = diff > 0 ? diff : '—';
 }
+
+// ── LUCIDE ICON INIT ──
+function lucideInit(root) {
+  (root || document).querySelectorAll('i[data-lucide]').forEach(el => {
+    const name = el.getAttribute('data-lucide')
+      .split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('');
+    const icon = lucide[name];
+    if (!icon) return;
+    const svg = lucide.createElement(icon);
+    svg.style.cssText = el.style.cssText;
+    el.replaceWith(svg);
+  });
+}
+
+lucideInit();
 
 // ── KEYBOARD NAV ──
 document.addEventListener('keydown', (e) => {
