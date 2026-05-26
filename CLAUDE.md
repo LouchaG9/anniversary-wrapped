@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Anniversary Wrapped** — a Spotify Wrapped-style interactive anniversary gift delivered as a set of three co-located files (`anniversary-wrapped.html`, `styles.css`, `script.js`). No build step, no package manager, no dev server. Open `anniversary-wrapped.html` directly in a browser. All three files must stay in the same directory for the HTML's relative links to resolve.
+**Anniversary Wrapped** — a Spotify Wrapped-style interactive anniversary gift delivered as a set of three co-located files (`index.html`, `styles.css`, `script.js`). No build step, no package manager, no dev server. Open `index.html` directly in a browser. All three files must stay in the same directory for the HTML's relative links to resolve.
 
 > **Note:** The project started as a single self-contained HTML file. CSS and JS were later separated into `styles.css` and `script.js` (linked via `<link>` and `<script src="...">`). If the gift needs to be a truly self-contained single file for distribution, inline `styles.css` inside a `<style>` tag and `script.js` inside a `<script>` tag in the HTML before delivery.
 
@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | File | Purpose |
 |---|---|
-| `anniversary-wrapped.html` | All 24 slide HTML (558 lines). Links to `styles.css` and `script.js`. |
+| `index.html` | All 24 slide HTML (558 lines). Links to `styles.css` and `script.js`. |
 | `styles.css` | CSS variables, component styles, animations, responsive breakpoints. |
 | `script.js` | JS globals, `goToSlide`, interactive mechanics (sliders, pick cards), confetti, counter. |
 | `PRD.txt` | Product requirements document — full slide deck spec and open items list. |
