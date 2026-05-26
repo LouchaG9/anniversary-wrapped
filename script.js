@@ -164,7 +164,7 @@ function buildHardGrid() {
       if (i >= startDay && i <= endDay) {
         cell.className = 'check-cell done';
         const icon = document.createElement('i');
-        icon.setAttribute('data-lucide', 'check');
+        icon.setAttribute('data-lucide', 'square-check');
         icon.style.cssText = 'width:12px;height:12px;';
         cell.appendChild(icon);
       } else {
