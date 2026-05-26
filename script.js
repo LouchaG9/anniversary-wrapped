@@ -5,9 +5,6 @@ const ENGAGEMENT_DATE = new Date('2025-09-15');
 
 let current = 0;
 
-// Hide prev on first load (starts on slide 0)
-document.getElementById('prev-btn').style.display = 'none';
-
 // ── BUILD PROGRESS DOTS ──
 const dotsEl = document.getElementById('progress-dots');
 for (let i = 0; i < TOTAL_SLIDES; i++) {
@@ -37,18 +34,6 @@ function goToSlide(index) {
 
   current = index;
 
-  // Update button styles based on slide bg
-  const nextBtn = document.getElementById('next-btn');
-  const prevBtn = document.getElementById('prev-btn');
-  const lightSlides = [0, 6, 8, 13, 14, 19];
-  [nextBtn, prevBtn].forEach(btn => {
-    btn.classList.toggle('dark', lightSlides.includes(current));
-  });
-
-  // Hide next on final slide, hide prev on first slide
-  nextBtn.style.display = current === TOTAL_SLIDES - 1 ? 'none' : '';
-  prevBtn.style.display = current === 0 ? 'none' : '';
-
   // Special actions
   if (index === 22) triggerConfetti();
   if (index === 23) updateDaysCounter();
@@ -59,10 +44,12 @@ function nextSlide() {
   goToSlide(current + 1);
 }
 
-// Tap anywhere on slide to advance (except interactive elements)
+// Left half = back, right half = forward (skip interactive elements)
 document.getElementById('app').addEventListener('click', (e) => {
-  const interactive = e.target.closest('.pick-card, .slider-thumb, .slider-track, .reveal-btn, #next-btn, .year-12-btn');
-  if (!interactive) nextSlide();
+  const interactive = e.target.closest('.pick-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn');
+  if (interactive) return;
+  if (e.clientX < window.innerWidth / 2) goToSlide(current - 1);
+  else goToSlide(current + 1);
 });
 
 // ── INTERACTIVE: PICK CARDS ──
@@ -167,11 +154,39 @@ function revealQuasos() { quasoSlider.reveal(); }
 function buildHardGrid() {
   const grid = document.getElementById('hard-grid');
   if (grid.children.length > 0) return;
-  for (let i = 0; i < 75; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'check-cell done';
-    grid.appendChild(cell);
-  }
+
+  const months = [
+    { label: 'Feb', total: 28, startDay: 2, endDay: 28 },
+    { label: 'Mar', total: 31, startDay: 1, endDay: 31 },
+    { label: 'Apr', total: 30, startDay: 1, endDay: 18 },
+  ];
+
+  months.forEach(({ label, total, startDay, endDay }) => {
+    const block = document.createElement('div');
+    block.className = 'month-block';
+
+    const labelEl = document.createElement('div');
+    labelEl.className = 'month-label text-cream';
+    labelEl.textContent = label;
+    block.appendChild(labelEl);
+
+    const monthGrid = document.createElement('div');
+    monthGrid.className = 'month-grid';
+
+    for (let i = 1; i <= total; i++) {
+      const cell = document.createElement('div');
+      if (i >= startDay && i <= endDay) {
+        cell.className = 'check-cell done';
+        cell.textContent = '✅';
+      } else {
+        cell.className = 'check-cell empty';
+      }
+      monthGrid.appendChild(cell);
+    }
+
+    block.appendChild(monthGrid);
+    grid.appendChild(block);
+  });
 }
 
 // ── CONFETTI ──
