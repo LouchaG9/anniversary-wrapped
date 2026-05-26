@@ -34,6 +34,9 @@ function goToSlide(index) {
 
   current = index;
 
+  const lightSlides = [1, 2, 3, 4, 5, 6, 7, 8, 14, 15, 16, 17, 18, 19, 20];
+  document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
+
   // Special actions
   if (index === 22) triggerConfetti();
   if (index === 23) updateDaysCounter();

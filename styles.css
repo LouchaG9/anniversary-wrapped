@@ -735,6 +735,44 @@ html, body {
   line-height: 1;
 }
 
+/* ── SECTION COHESION: LIGHT SLIDE OVERRIDES ── */
+.bg-cream .stat-row,
+.bg-blush .stat-row,
+.bg-gold .stat-row {
+  border-bottom-color: rgba(44,31,20,0.1);
+}
+
+.bg-cream .section-div-number,
+.bg-blush .section-div-number,
+.bg-gold .section-div-number {
+  color: var(--deep);
+}
+
+.bg-cream .slider-track {
+  background: rgba(44,31,20,0.12);
+}
+
+.bg-gold .country-card {
+  background: rgba(44,31,20,0.08);
+  border-color: rgba(44,31,20,0.12);
+}
+
+.bg-gold .country-name {
+  color: var(--deep);
+}
+
+.bg-blush .word-reveal {
+  color: var(--deep);
+}
+
+#nav.nav-dark .dot {
+  background: rgba(44,31,20,0.25);
+}
+
+#nav.nav-dark .dot.active {
+  background: rgba(44,31,20,0.8);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-height: 700px) {
   .stat-number { font-size: 64px; }
