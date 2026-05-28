@@ -77,43 +77,28 @@
       <div class="section-label text-dark anim-1">Quality Time</div>
       <div class="display-sm text-dark anim-2">Which hike<br/>was your<br/><em>favourite?</em></div>
     </div>
-    <div class="pick-grid anim-3" id="hike-cards">
-      <div class="pick-card" onclick="selectCard('hike-cards', this)">
-        <div class="pick-card-photo" style="height:70px; background: rgba(60,80,60,0.4);">
-          <div class="photo-label">[ Schäfler photo ]</div>
-        </div>
-        <div class="pick-card-inner" style="background: rgba(0,0,0,0.06);">
-          <div class="pick-emoji text-dark"><i data-lucide="mountain" style="width:28px;height:28px;"></i></div>
-          <div>
-            <div class="pick-card-label text-dark">Schäfler</div>
-            <div class="pick-card-sub text-dark">Switzerland · 11-12/09/25</div>
-          </div>
+    <div class="pick-grid anim-3" id="hike-cards" style="flex:1; min-height:0;">
+      <div class="pick-card" onclick="selectCard('hike-cards', this)" style="flex:1; position:relative; min-height:0;">
+        <img src="images/schaefler.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:10px 14px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); background:rgba(0,0,0,0.25);">
+          <div class="pick-card-label" style="color:#fff;">Schäfler</div>
+          <div class="pick-card-sub" style="color:rgba(255,255,255,0.7);">Switzerland · 11–12/09/25</div>
         </div>
         <div class="check-mark">✓</div>
       </div>
-      <div class="pick-card" onclick="selectCard('hike-cards', this)">
-        <div class="pick-card-photo" style="height:70px; background: rgba(50,70,80,0.4);">
-          <div class="photo-label">[ Oeschinensee photo ]</div>
-        </div>
-        <div class="pick-card-inner" style="background: rgba(0,0,0,0.06);">
-          <div class="pick-emoji text-dark"><i data-lucide="waves" style="width:28px;height:28px;"></i></div>
-          <div>
-            <div class="pick-card-label text-dark">Oeschinensee</div>
-            <div class="pick-card-sub text-dark">Switzerland · 15/09/25</div>
-          </div>
+      <div class="pick-card" onclick="selectCard('hike-cards', this)" style="flex:1; position:relative; min-height:0;">
+        <img src="images/oeschinensee.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:10px 14px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); background:rgba(0,0,0,0.25);">
+          <div class="pick-card-label" style="color:#fff;">Oeschinensee</div>
+          <div class="pick-card-sub" style="color:rgba(255,255,255,0.7);">Switzerland · 15/09/25</div>
         </div>
         <div class="check-mark">✓</div>
       </div>
-      <div class="pick-card" onclick="selectCard('hike-cards', this)">
-        <div class="pick-card-photo" style="height:70px; background: rgba(70,60,50,0.4);">
-          <div class="photo-label">[ Olpererhutte photo ]</div>
-        </div>
-        <div class="pick-card-inner" style="background: rgba(0,0,0,0.06);">
-          <div class="pick-emoji text-dark"><i data-lucide="mountain-snow" style="width:28px;height:28px;"></i></div>
-          <div>
-            <div class="pick-card-label text-dark">Olpererhutte</div>
-            <div class="pick-card-sub text-dark">Austria · 20/09/25</div>
-          </div>
+      <div class="pick-card" onclick="selectCard('hike-cards', this)" style="flex:1; position:relative; min-height:0;">
+        <img src="images/olpererhutte.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:10px 14px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); background:rgba(0,0,0,0.25);">
+          <div class="pick-card-label" style="color:#fff;">Olpererhutte</div>
+          <div class="pick-card-sub" style="color:rgba(255,255,255,0.7);">Austria · 20/09/25</div>
         </div>
         <div class="check-mark">✓</div>
       </div>
@@ -181,47 +166,31 @@
       <div class="display-sm text-dark anim-2">Best op shop<br/><em>find of the year?</em></div>
     </div>
     <div class="pick-grid-2 anim-3" id="opshop-cards">
-      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden;">
-        <div class="pick-card-photo" style="aspect-ratio: 3/4; height:auto; background: rgba(80,60,40,0.4); overflow:hidden;">
-          <img src="images/dining-table.jpeg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="pick-card-inner" style="background: rgba(0,0,0,0.06);">
-          <div>
-            <div class="pick-card-label text-dark" style="font-size:12px;">The Dining Table</div>
-          </div>
+      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden; position:relative; aspect-ratio:3/4;">
+        <img src="images/dining-table.jpeg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 10px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); background:rgba(0,0,0,0.25);">
+          <div class="pick-card-label" style="color:#fff; font-size:12px;">The Dining Table</div>
         </div>
         <div class="check-mark">✓</div>
       </div>
-      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden;">
-        <div class="pick-card-photo" style="aspect-ratio: 3/4; height:auto; background: rgba(40,30,30,0.4); overflow:hidden;">
-          <img src="images/tcm-poster-frame.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="pick-card-inner" style="background: rgba(0,0,0,0.06);">
-          <div>
-            <div class="pick-card-label text-dark" style="font-size:12px;">TCM Poster Frame</div>
-          </div>
+      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden; position:relative; aspect-ratio:3/4;">
+        <img src="images/tcm-poster-frame.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 10px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); background:rgba(0,0,0,0.25);">
+          <div class="pick-card-label" style="color:#fff; font-size:12px;">TCM Poster Frame</div>
         </div>
         <div class="check-mark">✓</div>
       </div>
-      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden;">
-        <div class="pick-card-photo" style="aspect-ratio: 3/4; height:auto; background: rgba(60,80,60,0.4); overflow:hidden;">
-          <img src="images/markers.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="pick-card-inner" style="background: rgba(0,0,0,0.06);">
-          <div>
-            <div class="pick-card-label text-dark" style="font-size:12px;">Coloured Markers</div>
-          </div>
+      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden; position:relative; aspect-ratio:3/4;">
+        <img src="images/markers.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 10px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); background:rgba(0,0,0,0.25);">
+          <div class="pick-card-label" style="color:#fff; font-size:12px;">Coloured Markers</div>
         </div>
         <div class="check-mark">✓</div>
       </div>
-      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden;">
-        <div class="pick-card-photo" style="aspect-ratio: 3/4; height:auto; background: rgba(50,40,20,0.4); overflow:hidden;">
-          <img src="images/monopoly.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="pick-card-inner" style="background: rgba(0,0,0,0.06);">
-          <div>
-            <div class="pick-card-label text-dark" style="font-size:12px;">Vintage Monopoly</div>
-          </div>
+      <div class="pick-card" onclick="selectCard('opshop-cards', this)" style="border-radius:12px; overflow:hidden; position:relative; aspect-ratio:3/4;">
+        <img src="images/monopoly.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 10px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); background:rgba(0,0,0,0.25);">
+          <div class="pick-card-label" style="color:#fff; font-size:12px;">Vintage Monopoly</div>
         </div>
         <div class="check-mark">✓</div>
       </div>
@@ -269,18 +238,16 @@
     <div class="hero-overlay"></div>
     <div style="text-align:center; width:100%; position:absolute; bottom:100px; left:0; z-index:2; padding:0 28px;">
       <div class="section-label text-cream anim-1" style="opacity:0.7;">Quality Time</div>
-      <div class="anim-2"><i data-lucide="paw-print" style="width:42px;height:42px;"></i></div>
-      <div class="display-sm text-cream anim-2" style="margin-top:8px;">Apollo.</div>
+      <div class="display-sm text-cream anim-2">Hanging out with Apollo.</div>
       <div class="divider anim-3" style="background:rgba(255,255,255,0.3); margin: 20px auto;"></div>
-      <div class="anim-3" style="display:flex; gap:24px; justify-content:center; align-items:center;">
+      <div class="anim-3" style="display:flex; gap:32px; justify-content:center; align-items:center;">
         <div style="text-align:center;">
-          <div class="stat-number text-cream" id="apollo-walks" style="font-size:72px;">0</div>
-          <div class="stat-label text-cream">walks together</div>
+          <div class="stat-number text-cream" id="apollo-walks" style="font-size:144px; font-family:'Cormorant Garamond',serif; font-weight:300; line-height:1;">0</div>
+          <div class="stat-label text-cream" style="margin-top:12px;">walks together</div>
         </div>
-        <div style="width:1px; background:rgba(255,255,255,0.3); height:60px;"></div>
         <div style="text-align:center;">
-          <div class="stat-number text-cream" id="apollo-days" style="font-size:72px;">0</div>
-          <div class="stat-label text-cream">days as dog parents</div>
+          <div class="stat-number text-cream" id="apollo-days" style="font-size:144px; font-family:'Cormorant Garamond',serif; font-weight:300; line-height:1;">0</div>
+          <div class="stat-label text-cream" style="margin-top:12px;">days as dog parents</div>
         </div>
       </div>
       <div class="italic text-cream anim-4" style="margin-top:20px; opacity:0.85;">
@@ -540,8 +507,8 @@
       </div>
     </div>
     <div class="engagement-photos anim-2">
-      <div class="photo-slot" style="height:180px; grid-column: 1/-1;">
-        <div class="photo-label" style="color:var(--cream); opacity:0.3;">[ best engagement photo ]</div>
+      <div class="photo-slot" style="height:180px; grid-column: 1/-1; overflow:hidden;">
+        <img src="images/engagement-1.png" style="width:100%; height:100%; object-fit:cover;">
       </div>
       <div class="photo-slot" style="height:100px;">
         <div class="photo-label" style="color:var(--cream); opacity:0.3;">[ photo 2 ]</div>
