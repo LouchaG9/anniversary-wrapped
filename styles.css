@@ -605,10 +605,20 @@ html, body {
   z-index: 1;
 }
 
+/* Slide 0 hero scrim — transparent at top, dark at bottom for text contrast */
+[data-index="0"] .hero-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%);
+}
+
+/* Slide 8 Apollo scrim — same treatment, darker overall to lift text */
+[data-index="8"] .hero-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.2) 100%);
+}
+
 /* ── TITLE SLIDE ── */
 .title-ornament {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 13px;
+  font-size: 26px;
   font-weight: 300;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -617,7 +627,7 @@ html, body {
 
 .title-years {
   font-family: 'DM Sans', sans-serif;
-  font-size: 110px;
+  font-size: 220px;
   font-weight: 300;
   line-height: 1;
   color: var(--deep);
@@ -627,7 +637,7 @@ html, body {
 .title-of-us {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 38px;
+  font-size: 76px;
   font-weight: 300;
   color: var(--soft-brown);
   margin-top: -8px;
