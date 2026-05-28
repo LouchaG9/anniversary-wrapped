@@ -615,6 +615,11 @@ html, body {
   background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.2) 100%);
 }
 
+/* Slide 4 hiking — flat dark tint to fade the map into the background */
+[data-index="4"] .hero-overlay {
+  background: rgba(15, 10, 8, 0.80);
+}
+
 /* ── TITLE SLIDE ── */
 .title-ornament {
   font-family: 'Cormorant Garamond', serif;
@@ -755,6 +760,12 @@ html, body {
 .bg-cream .section-div-number,
 .bg-blush .section-div-number,
 .bg-gold .section-div-number {
+  color: var(--deep);
+}
+
+.bg-cream .section-div-title,
+.bg-blush .section-div-title,
+.bg-gold .section-div-title {
   color: var(--deep);
 }
 

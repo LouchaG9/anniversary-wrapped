@@ -38,6 +38,7 @@ function goToSlide(index) {
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
 
   // Special actions
+  if (index === 8)  animateApolloStats();
   if (index === 22) triggerConfetti();
   if (index === 23) updateDaysCounter();
   if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
@@ -199,6 +200,24 @@ function triggerConfetti() {
       setTimeout(() => piece.remove(), 4000);
     }, i * 40);
   }
+}
+
+// ── APOLLO STAT COUNT-UP ──
+function countUp(el, target, duration) {
+  const start = performance.now();
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    // ease-out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function animateApolloStats() {
+  countUp(document.getElementById('apollo-walks'), 285, 2500);
+  countUp(document.getElementById('apollo-days'),  365, 2500);
 }
 
 // ── DAYS COUNTER ──

@@ -41,28 +41,29 @@
   <!-- ═══════════════════════════════════════
        SLIDE 2 — NYT GAMES
   ══════════════════════════════════════════ -->
-  <div class="slide bg-cream" data-index="2">
-    <div style="width:100%;">
-      <div class="section-label text-dark anim-1">Quality Time</div>
-      <div class="display text-dark anim-2" style="font-size:48px; line-height:1.1;">
+  <div class="slide" data-index="2" style="background-image: url('images/nyt-games.jpg'); background-size: cover; background-position: center; background-color: var(--cream);">
+    <div class="hero-overlay"></div>
+    <div style="width:100%; position:relative; z-index:2;">
+      <div class="section-label text-cream anim-1">Quality Time</div>
+      <div class="display text-cream anim-2" style="font-size:48px; line-height:1.1;">
         Wake up<br/><em>slowly.</em>
       </div>
       <div class="anim-3" style="margin-top:24px;">
-        <div class="stat-row">
-          <span class="stat-row-label">Longest Wordle streak</span>
+        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+          <span class="stat-row-label" style="color:var(--cream);">Longest Wordle streak</span>
           <span class="stat-row-value">103 days</span>
         </div>
-        <div class="stat-row">
-          <span class="stat-row-label">Favourite game</span>
+        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+          <span class="stat-row-label" style="color:var(--cream);">Favourite game</span>
           <span class="stat-row-value">Spelling Bee <em style="font-size:0.7em; opacity:0.55;">(Shrelling Shree)</em></span>
         </div>
         <div class="stat-row" style="border-bottom:none;">
-          <span class="stat-row-label">Hardest crossword</span>
+          <span class="stat-row-label" style="color:var(--cream);">Hardest crossword completed</span>
           <span class="stat-row-value">Wednesday</span>
         </div>
       </div>
-      <div class="divider anim-4" style="background:rgba(44,31,20,0.15); margin:20px 0;"></div>
-      <div class="body text-dark anim-4" style="font-size:13px; opacity:0.5;">
+      <div class="divider anim-4" style="background:rgba(245,239,230,0.3); margin:20px 0;"></div>
+      <div class="body text-cream anim-4" style="font-size:13px; opacity:0.5;">
         NYT Games together, every day.
       </div>
     </div>
@@ -122,23 +123,24 @@
   <!-- ═══════════════════════════════════════
        SLIDE 4 — HIKE STATS
   ══════════════════════════════════════════ -->
-  <div class="slide bg-cream" data-index="4">
-    <div style="width:100%;">
-      <div class="section-label text-dark anim-1">Quality Time</div>
-      <div class="display text-dark anim-2" style="font-size:48px; line-height:1.1;">
+  <div class="slide" data-index="4" style="background-image: url('images/hiking.jpg'); background-size: 150%; background-position: center; background-color: var(--deep);">
+    <div class="hero-overlay"></div>
+    <div style="width:100%; position:absolute; bottom:100px; left:0; z-index:2; padding:0 28px;">
+      <div class="section-label text-cream anim-1">Quality Time</div>
+      <div class="display text-cream anim-2" style="font-size:48px; line-height:1.1;">
         A year of<br/><em>hiking.</em>
       </div>
       <div class="anim-3" style="margin-top:24px;">
-        <div class="stat-row">
-          <span class="stat-row-label">Hikes completed</span>
+        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+          <span class="stat-row-label" style="color:var(--cream);">Hikes completed</span>
           <span class="stat-row-value">15</span>
         </div>
-        <div class="stat-row">
-          <span class="stat-row-label">Total distance</span>
+        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+          <span class="stat-row-label" style="color:var(--cream);">Total distance</span>
           <span class="stat-row-value">127.1 km</span>
         </div>
         <div class="stat-row" style="border-bottom:none;">
-          <span class="stat-row-label">Countries hiked in</span>
+          <span class="stat-row-label" style="color:var(--cream);">Countries hiked in</span>
           <span class="stat-row-value">4</span>
         </div>
       </div>
@@ -272,12 +274,12 @@
       <div class="divider anim-3" style="background:rgba(255,255,255,0.3); margin: 20px auto;"></div>
       <div class="anim-3" style="display:flex; gap:24px; justify-content:center; align-items:center;">
         <div style="text-align:center;">
-          <div class="stat-number text-cream" style="font-size:72px;">285</div>
+          <div class="stat-number text-cream" id="apollo-walks" style="font-size:72px;">0</div>
           <div class="stat-label text-cream">walks together</div>
         </div>
         <div style="width:1px; background:rgba(255,255,255,0.3); height:60px;"></div>
         <div style="text-align:center;">
-          <div class="stat-number text-cream" style="font-size:72px;">365</div>
+          <div class="stat-number text-cream" id="apollo-days" style="font-size:72px;">0</div>
           <div class="stat-label text-cream">days as dog parents</div>
         </div>
       </div>
