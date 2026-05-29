@@ -1,4 +1,4 @@
-const TOTAL_SLIDES = 24;
+const TOTAL_SLIDES = 26;
 const ACTUAL_WALKS = 285;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
@@ -34,13 +34,13 @@ function goToSlide(index) {
 
   current = index;
 
-  const lightSlides = [1, 2, 3, 4, 5, 6, 7, 8, 14, 15, 16, 17, 18, 19, 20];
+  const lightSlides = [1, 2, 3, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
 
   // Special actions
   if (index === 8)  animateApolloStats();
-  if (index === 22) triggerConfetti();
-  if (index === 23) updateDaysCounter();
+  if (index === 24) triggerConfetti();
+  if (index === 25) updateDaysCounter();
   if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
 }
 
