@@ -3,6 +3,21 @@ const ACTUAL_WALKS = 285;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
 
+const TRACKS = [
+  {
+    url:    'https://p.scdn.co/mp3-preview/974a2d5b5bc9e767e270ba7d9f13c9b03ab5a60a',
+    slides: [1, 2, 3, 4, 5, 6, 7, 8],  // Opening / Quality Time section
+  },
+  {
+    url:    'https://p.scdn.co/mp3-preview/40c5b34865a39612d71695ecf3255fd6a70b5938',
+    slides: [9, 10, 11, 12, 13],        // Challenges section
+  },
+  {
+    url:    'https://p.scdn.co/mp3-preview/eea58a85171bbfd67b0a8ab4b736e67ee69b489e',
+    slides: [22, 23],                    // Engagement reveal + final
+  },
+];
+
 let current = 0;
 
 // ── BUILD PROGRESS DOTS ──
@@ -32,6 +47,7 @@ function goToSlide(index) {
   document.getElementById(`dot-${current}`)?.classList.remove('active');
   document.getElementById(`dot-${index}`)?.classList.add('active');
 
+  const prevIndex = current;
   current = index;
 
   const lightSlides = [1, 2, 3, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
@@ -42,6 +58,8 @@ function goToSlide(index) {
   if (index === 24) triggerConfetti();
   if (index === 25) updateDaysCounter();
   if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
+
+  handleMusicTransition(prevIndex, index);
 }
 
 function nextSlide() {
@@ -180,6 +198,74 @@ function buildHardGrid() {
     block.appendChild(monthGrid);
     grid.appendChild(block);
   });
+}
+
+// ── AUDIO PLAYER ──
+const bgAudio = new Audio();
+bgAudio.loop   = true;
+bgAudio.volume = 0;
+
+let musicActive = false;
+let audioMuted  = false;
+let _fadeTimer  = null;
+
+function _trackForSlide(index) {
+  return TRACKS.find(t => t.slides.includes(index)) || null;
+}
+
+function _fadeTo(target, ms, onDone) {
+  clearInterval(_fadeTimer);
+  const steps = 40;
+  const tick  = ms / steps;
+  const step  = (target - bgAudio.volume) / steps;
+  _fadeTimer  = setInterval(() => {
+    bgAudio.volume = parseFloat(Math.max(0, Math.min(1, bgAudio.volume + step)).toFixed(3));
+    if (Math.abs(bgAudio.volume - target) < 0.02) {
+      bgAudio.volume = target;
+      clearInterval(_fadeTimer);
+      if (target === 0) { bgAudio.pause(); bgAudio.currentTime = 0; }
+      if (onDone) onDone();
+    }
+  }, tick);
+}
+
+function _startTrack(track) {
+  musicActive    = true;
+  bgAudio.src    = track.url;
+  bgAudio.currentTime = 0;
+  bgAudio.volume = 0;
+  bgAudio.play().then(() => _fadeTo(0.8, 2000)).catch(() => { musicActive = false; _updateMuteBtn(); });
+  _updateMuteBtn();
+}
+
+function _stopTrack(onDone) {
+  if (!musicActive) { if (onDone) onDone(); return; }
+  musicActive = false;
+  _fadeTo(0, 1500, onDone);
+  _updateMuteBtn();
+}
+
+function handleMusicTransition(prevIndex, nextIndex) {
+  const prevTrack = _trackForSlide(prevIndex);
+  const nextTrack = _trackForSlide(nextIndex);
+  if (prevTrack === nextTrack) return;
+  if (prevTrack && nextTrack) _stopTrack(() => _startTrack(nextTrack));
+  else if (nextTrack)         _startTrack(nextTrack);
+  else                        _stopTrack();
+}
+
+function toggleMute() {
+  audioMuted    = !audioMuted;
+  bgAudio.muted = audioMuted;
+  _updateMuteBtn();
+}
+
+function _updateMuteBtn() {
+  const btn = document.getElementById('mute-btn');
+  if (!btn) return;
+  btn.style.opacity       = musicActive ? '1' : '0';
+  btn.style.pointerEvents = musicActive ? 'auto' : 'none';
+  btn.textContent         = audioMuted ? '✕' : '♫';
 }
 
 // ── CONFETTI ──
