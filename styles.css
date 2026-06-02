@@ -674,6 +674,28 @@ html, body {
   line-height: 1.05;
 }
 
+/* ── BEGIN BUTTON (slide 0) ── */
+.begin-btn {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(245,239,230,0.35);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border-radius: 100px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+.begin-btn:active { background: rgba(255,255,255,0.25); }
+
+#progress-dots { transition: opacity 0.4s; }
+#nav.dots-hidden #progress-dots { opacity: 0; pointer-events: none; }
+
 /* ── FINAL SLIDE ── */
 .year-12-btn {
   background: transparent;

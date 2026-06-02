@@ -18,7 +18,7 @@ const TRACKS = [
   },
   {
     url:       'audio/beyond.mp3',
-    slides:    [22, 23],                    // Engagement reveal + final
+    slides:    [23, 24, 25],                 // Engagement build-up, reveal + final
     startTime: 66,
     fadeInMs:  2000,
   },
@@ -34,6 +34,7 @@ for (let i = 0; i < TOTAL_SLIDES; i++) {
   d.id = `dot-${i}`;
   dotsEl.appendChild(d);
 }
+document.getElementById('nav').classList.add('dots-hidden');
 
 // ── SLIDE NAVIGATION ──
 function goToSlide(index) {
@@ -58,6 +59,7 @@ function goToSlide(index) {
 
   const lightSlides = [1, 2, 3, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
+  document.getElementById('nav').classList.toggle('dots-hidden', index === 0);
 
   // Special actions
   if (index === 8)  animateApolloStats();
@@ -74,7 +76,7 @@ function nextSlide() {
 
 // Left half = back, right half = forward (skip interactive elements)
 document.getElementById('app').addEventListener('click', (e) => {
-  const interactive = e.target.closest('.pick-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn');
+  const interactive = e.target.closest('.pick-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
   if (interactive) return;
   if (e.clientX < window.innerWidth / 2) goToSlide(current - 1);
   else goToSlide(current + 1);
