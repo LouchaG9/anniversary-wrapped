@@ -5,16 +5,22 @@ const ENGAGEMENT_DATE = new Date('2025-09-15');
 
 const TRACKS = [
   {
-    url:    'https://p.scdn.co/mp3-preview/974a2d5b5bc9e767e270ba7d9f13c9b03ab5a60a',
-    slides: [1, 2, 3, 4, 5, 6, 7, 8],  // Opening / Quality Time section
+    url:       'audio/loving-is-easy.mp3',
+    slides:    [1, 2, 3, 4, 5, 6, 7, 8],  // Opening / Quality Time section
+    startTime: 0,
+    fadeInMs:  3000,
   },
   {
-    url:    'https://p.scdn.co/mp3-preview/40c5b34865a39612d71695ecf3255fd6a70b5938',
-    slides: [9, 10, 11, 12, 13],        // Challenges section
+    url:       'audio/follow-you.mp3',
+    slides:    [9, 10, 11, 12, 13],        // Challenges section
+    startTime: 60,
+    fadeInMs:  2000,
   },
   {
-    url:    'https://p.scdn.co/mp3-preview/eea58a85171bbfd67b0a8ab4b736e67ee69b489e',
-    slides: [22, 23],                    // Engagement reveal + final
+    url:       'audio/beyond.mp3',
+    slides:    [22, 23],                    // Engagement reveal + final
+    startTime: 66,
+    fadeInMs:  2000,
   },
 ];
 
@@ -232,9 +238,9 @@ function _fadeTo(target, ms, onDone) {
 function _startTrack(track) {
   musicActive    = true;
   bgAudio.src    = track.url;
-  bgAudio.currentTime = 0;
+  bgAudio.currentTime = track.startTime ?? 0;
   bgAudio.volume = 0;
-  bgAudio.play().then(() => _fadeTo(0.8, 2000)).catch(() => { musicActive = false; _updateMuteBtn(); });
+  bgAudio.play().then(() => _fadeTo(0.8, track.fadeInMs ?? 2000)).catch(() => { musicActive = false; _updateMuteBtn(); });
   _updateMuteBtn();
 }
 
