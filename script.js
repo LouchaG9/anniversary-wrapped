@@ -57,7 +57,7 @@ function goToSlide(index) {
   const prevIndex = current;
   current = index;
 
-  const lightSlides = [1, 2, 3, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
+  const lightSlides = [1, 2, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
   document.getElementById('nav').classList.toggle('dots-hidden', index === 0);
 

@@ -15,15 +15,14 @@
   <!-- ═══════════════════════════════════════
        SLIDE 0 — TITLE
   ══════════════════════════════════════════ -->
-  <div class="slide active" data-index="0" style="background-image: url('images/hero.jpg'); background-size: cover; background-position: left center; background-color: var(--deep);">
+  <div class="slide active" data-index="0" style="background-image: url('images/hero.jpg'); background-size: cover; background-position: 8% center; background-color: var(--deep);">
     <div class="hero-overlay"></div>
-    <div style="text-align:center; width:100%; position:absolute; bottom:100px; left:0; z-index:2; padding:0 28px;">
-      <div class="title-ornament anim-1" style="color: rgba(245,239,230,0.7);">Est. 2014</div>
-      <div class="title-years anim-2" style="color: var(--cream);">11</div>
-      <div class="title-of-us anim-3" style="color: var(--cream);">years of us</div>
-      <div class="divider-gold anim-4" style="margin: 20px auto;"></div>
-      <button class="begin-btn anim-5" onclick="goToSlide(1)">Let's begin</button>
+    <div style="text-align:center; width:100%; z-index:2;">
+      <div class="title-ornament anim-1" style="color: rgba(245,239,230,0.7);">The</div>
+      <div class="title-years anim-2" style="color: var(--cream);">11<sup style="font-size:0.35em; vertical-align:1.1em; letter-spacing:0;">th</sup></div>
+      <div class="title-of-us anim-3" style="color: var(--cream);">year of us</div>
     </div>
+    <button class="begin-btn anim-4" onclick="goToSlide(1)" style="position:absolute; bottom:96px; left:0; right:0; margin:0 auto; width:fit-content; z-index:2;">Let's begin</button>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -51,12 +50,16 @@
       </div>
       <div class="anim-3" style="margin-top:24px;">
         <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+          <span class="stat-row-label" style="color:var(--cream);">Longest Connections streak</span>
+          <span class="stat-row-value">82 days</span>
+        </div>
+        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
           <span class="stat-row-label" style="color:var(--cream);">Longest Wordle streak</span>
           <span class="stat-row-value">103 days</span>
         </div>
         <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
           <span class="stat-row-label" style="color:var(--cream);">Favourite game</span>
-          <span class="stat-row-value">Spelling Bee <em style="font-size:0.7em; opacity:0.55;">(Shrelling Shree)</em></span>
+          <span class="stat-row-value">Shrelling Shree</span>
         </div>
         <div class="stat-row" style="border-bottom:none;">
           <span class="stat-row-label" style="color:var(--cream);">Hardest crossword completed</span>
@@ -64,16 +67,43 @@
         </div>
       </div>
       <div class="divider anim-4" style="background:rgba(245,239,230,0.3); margin:20px 0;"></div>
-      <div class="body text-cream anim-4" style="font-size:13px; opacity:0.5;">
+      <div class="italic text-cream anim-4" style="font-size:22px; opacity:0.6;">
         NYT Games together, every day.
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════
-       SLIDE 3 — HIKES (INTERACTIVE PICK)
+       SLIDE 3 — HIKE STATS
   ══════════════════════════════════════════ -->
-  <div class="slide bg-cream" data-index="3" style="justify-content:flex-start; padding-top:36px;">
+  <div class="slide" data-index="3" style="background-image: url('images/hiking.jpg'); background-size: 150%; background-position: center; background-color: var(--deep);">
+    <div class="hero-overlay"></div>
+    <div style="width:100%; position:absolute; bottom:100px; left:0; z-index:2; padding:0 28px;">
+      <div class="section-label text-cream anim-1">Quality Time</div>
+      <div class="display text-cream anim-2" style="font-size:48px; line-height:1.1;">
+        A year of<br/><em>hiking.</em>
+      </div>
+      <div class="anim-3" style="margin-top:24px;">
+        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+          <span class="stat-row-label" style="color:var(--cream);">Hikes completed</span>
+          <span class="stat-row-value">15</span>
+        </div>
+        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+          <span class="stat-row-label" style="color:var(--cream);">Total distance</span>
+          <span class="stat-row-value">138.03 km</span>
+        </div>
+        <div class="stat-row" style="border-bottom:none;">
+          <span class="stat-row-label" style="color:var(--cream);">Countries hiked in</span>
+          <span class="stat-row-value">4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 4 — HIKES (INTERACTIVE PICK)
+  ══════════════════════════════════════════ -->
+  <div class="slide bg-cream" data-index="4" style="justify-content:flex-start; padding-top:36px;">
     <div style="width:100%; margin-bottom:10px;">
       <div class="section-label text-dark anim-1">Quality Time</div>
       <div class="display-sm text-dark anim-2">Which hike<br/>was your<br/><em>favourite?</em></div>
@@ -102,33 +132,6 @@
           <div class="pick-card-sub" style="color:rgba(255,255,255,0.7);">Austria · 20/09/25</div>
         </div>
         <div class="check-mark">✓</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       SLIDE 4 — HIKE STATS
-  ══════════════════════════════════════════ -->
-  <div class="slide" data-index="4" style="background-image: url('images/hiking.jpg'); background-size: 150%; background-position: center; background-color: var(--deep);">
-    <div class="hero-overlay"></div>
-    <div style="width:100%; position:absolute; bottom:100px; left:0; z-index:2; padding:0 28px;">
-      <div class="section-label text-cream anim-1">Quality Time</div>
-      <div class="display text-cream anim-2" style="font-size:48px; line-height:1.1;">
-        A year of<br/><em>hiking.</em>
-      </div>
-      <div class="anim-3" style="margin-top:24px;">
-        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
-          <span class="stat-row-label" style="color:var(--cream);">Hikes completed</span>
-          <span class="stat-row-value">15</span>
-        </div>
-        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
-          <span class="stat-row-label" style="color:var(--cream);">Total distance</span>
-          <span class="stat-row-value">127.1 km</span>
-        </div>
-        <div class="stat-row" style="border-bottom:none;">
-          <span class="stat-row-label" style="color:var(--cream);">Countries hiked in</span>
-          <span class="stat-row-value">4</span>
-        </div>
       </div>
     </div>
   </div>
