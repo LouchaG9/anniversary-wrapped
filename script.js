@@ -45,10 +45,21 @@ function goToSlide(index) {
 
   if (!next_slide) return;
 
-  current_slide.classList.remove('active');
-  current_slide.classList.add('exit');
-  setTimeout(() => current_slide.classList.remove('exit'), 600);
+  const direction   = index > current ? 1 : -1;
+  const exitClass   = direction > 0 ? 'exit-left' : 'exit-right';
+  const enterOffset = direction > 0 ? '60px' : '-60px';
 
+  // Exit current slide in correct direction
+  current_slide.classList.remove('active');
+  current_slide.classList.add(exitClass);
+  setTimeout(() => current_slide.classList.remove(exitClass), 650);
+
+  // Snap incoming slide to start position (no transition), then animate in
+  next_slide.style.transition = 'none';
+  next_slide.style.transform  = `translateX(${enterOffset})`;
+  void next_slide.offsetHeight; // force reflow to commit initial position
+  next_slide.style.transition = '';
+  next_slide.style.transform  = '';
   next_slide.classList.add('active');
 
   document.getElementById(`dot-${current}`)?.classList.remove('active');

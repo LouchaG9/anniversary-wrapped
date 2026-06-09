@@ -37,20 +37,26 @@ html, body {
   padding: 40px 28px 80px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transform: translateY(30px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  transform: translateX(0);
   overflow: hidden;
 }
 
 .slide.active {
   opacity: 1;
   pointer-events: all;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
-.slide.exit {
+.slide.exit-left {
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateX(-60px);
+  pointer-events: none;
+}
+
+.slide.exit-right {
+  opacity: 0;
+  transform: translateX(60px);
   pointer-events: none;
 }
 
