@@ -1,5 +1,5 @@
 const TOTAL_SLIDES = 26;
-const ACTUAL_WALKS = 285;
+const ACTUAL_WALKS = 246;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
 
@@ -310,7 +310,7 @@ function countUp(el, target, duration) {
 }
 
 function animateApolloStats() {
-  countUp(document.getElementById('apollo-walks'), 285, 2500);
+  countUp(document.getElementById('apollo-walks'), ACTUAL_WALKS, 2500);
   countUp(document.getElementById('apollo-days'),  365, 2500);
 }
 
