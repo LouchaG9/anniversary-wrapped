@@ -73,7 +73,10 @@ function goToSlide(index) {
   document.getElementById('nav').classList.toggle('dots-hidden', index === 0);
 
   // Special actions
+  if (index === 3)  animateHikingStats();
+  if (index === 5)  animateBoulderingStat();
   if (index === 8)  animateApolloStats();
+  if (index === 21) animateShowedUp();
   if (index === 11) initVerdictSlider();
   if (index === 23) initPhraseReveal();
   if (index === 25) triggerConfetti();
@@ -414,6 +417,20 @@ function triggerConfetti() {
       setTimeout(() => piece.remove(), 4000);
     }, i * 40);
   }
+}
+
+// ── STAT COUNT-UPS ──
+function animateHikingStats() {
+  countUp(document.getElementById('hike-count'),      15, 1800);
+  countUp(document.getElementById('countries-hiked'),  4, 1400);
+}
+
+function animateBoulderingStat() {
+  countUp(document.getElementById('boulder-sessions'), 57, 2000);
+}
+
+function animateShowedUp() {
+  countUp(document.getElementById('showed-up-days'), 365, 2500);
 }
 
 // ── APOLLO STAT COUNT-UP ──

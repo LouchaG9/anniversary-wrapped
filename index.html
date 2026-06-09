@@ -86,7 +86,7 @@
       <div class="anim-3" style="margin-top:24px;">
         <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
           <span class="stat-row-label" style="color:var(--cream);">Hikes completed</span>
-          <span class="stat-row-value">15</span>
+          <span class="stat-row-value" id="hike-count">0</span>
         </div>
         <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
           <span class="stat-row-label" style="color:var(--cream);">Total distance</span>
@@ -94,7 +94,7 @@
         </div>
         <div class="stat-row" style="border-bottom:none;">
           <span class="stat-row-label" style="color:var(--cream);">Countries hiked in</span>
-          <span class="stat-row-value">4</span>
+          <span class="stat-row-value" id="countries-hiked">0</span>
         </div>
       </div>
     </div>
@@ -146,7 +146,7 @@
       <div class="divider anim-3" style="background:var(--deep); margin: 20px auto;"></div>
       <div class="anim-3" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
         <div style="text-align:center;">
-          <div class="stat-number text-dark" style="font-size:64px;">57</div>
+          <div class="stat-number text-dark" id="boulder-sessions" style="font-size:64px;">0</div>
           <div class="stat-label text-dark">sessions this year</div>
         </div>
         <div style="width:1px; background:rgba(44,31,20,0.2); margin: 8px 0;"></div>
@@ -546,8 +546,8 @@
       <div class="display text-dark anim-2" style="margin-top:16px; font-size:42px; line-height:1.2;">
         We showed up<br/>for each other
       </div>
-      <div class="display text-dark anim-3" style="font-size:96px; line-height:1; margin: 16px 0;">
-        365
+      <div class="display text-dark anim-3" id="showed-up-days" style="font-size:96px; line-height:1; margin: 16px 0;">
+        0
       </div>
       <div class="stat-label text-dark anim-3">days in a row</div>
       <div class="divider-gold anim-4" style="margin: 20px auto;"></div>
