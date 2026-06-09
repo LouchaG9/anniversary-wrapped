@@ -77,11 +77,16 @@ function nextSlide() {
 
 // Left half = back, right half = forward (skip interactive elements)
 document.getElementById('app').addEventListener('click', (e) => {
-  const interactive = e.target.closest('.pick-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
+  const interactive = e.target.closest('.pick-card, .country-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
   if (interactive) return;
   if (e.clientX < window.innerWidth / 2) goToSlide(current - 1);
   else goToSlide(current + 1);
 });
+
+// ── INTERACTIVE: COUNTRY FLIP ──
+function flipCountry(card) {
+  card.classList.toggle('flipped');
+}
 
 // ── INTERACTIVE: PICK CARDS ──
 function selectCard(groupId, card) {

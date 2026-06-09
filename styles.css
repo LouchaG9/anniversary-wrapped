@@ -490,10 +490,60 @@ html, body {
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 10px;
-  padding: 12px 14px;
+  cursor: pointer;
+  perspective: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.country-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  border-radius: inherit;
+}
+
+.country-card.flipped .country-card-inner {
+  transform: rotateY(180deg);
+}
+
+.country-card-front,
+.country-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   align-items: center;
+}
+
+.country-card-front {
+  padding: 12px 14px;
   gap: 10px;
+}
+
+.country-card-back {
+  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(44,31,20,0.7);
+  justify-content: center;
+  flex-direction: column;
+}
+
+.country-card-back-label {
+  position: absolute;
+  bottom: 7px;
+  left: 10px;
+  font-size: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .country-flag { font-size: 22px; }
@@ -803,7 +853,7 @@ html, body {
   border-color: rgba(44,31,20,0.12);
 }
 
-.bg-gold .country-name {
+.bg-gold .country-card-front .country-name {
   color: var(--deep);
 }
 
