@@ -86,7 +86,7 @@
       <div class="anim-3" style="margin-top:24px;">
         <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
           <span class="stat-row-label" style="color:var(--cream);">Hikes completed</span>
-          <span class="stat-row-value" id="hike-count">0</span>
+          <span class="stat-row-value" id="hike-count" style="min-width:2.5ch; display:inline-block; text-align:right;">0</span>
         </div>
         <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
           <span class="stat-row-label" style="color:var(--cream);">Total distance</span>
@@ -94,7 +94,7 @@
         </div>
         <div class="stat-row" style="border-bottom:none;">
           <span class="stat-row-label" style="color:var(--cream);">Countries hiked in</span>
-          <span class="stat-row-value" id="countries-hiked">0</span>
+          <span class="stat-row-value" id="countries-hiked" style="min-width:1.5ch; display:inline-block; text-align:right;">0</span>
         </div>
       </div>
     </div>
@@ -145,13 +145,13 @@
       <div class="display text-dark anim-2" style="font-size:42px;">We sent<br/>our first<br/><strong style="font-weight:500;">Blue.</strong></div>
       <div class="divider anim-3" style="background:var(--deep); margin: 20px auto;"></div>
       <div class="anim-3" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-        <div style="text-align:center;">
-          <div class="stat-number text-dark" id="boulder-sessions" style="font-size:64px;">0</div>
+        <div style="text-align:center; width:100px; flex-shrink:0;">
+          <div class="stat-number text-dark" id="boulder-sessions" style="font-size:64px; width:100px; height:78px; display:flex; align-items:center; justify-content:center;">0</div>
           <div class="stat-label text-dark">sessions this year</div>
         </div>
         <div style="width:1px; background:rgba(44,31,20,0.2); margin: 8px 0;"></div>
-        <div style="text-align:center;">
-          <div class="stat-number text-dark" style="font-size:64px;"><i data-lucide="circle" style="width:64px;height:64px;fill:#4a90d9;stroke:none;"></i></div>
+        <div style="text-align:center; width:100px; flex-shrink:0;">
+          <div class="stat-number text-dark" style="font-size:64px; width:100px; height:78px; display:flex; align-items:center; justify-content:center;"><i data-lucide="circle" style="width:64px;height:64px;fill:#4a90d9;stroke:none;"></i></div>
           <div class="stat-label text-dark">hardest grade together</div>
         </div>
       </div>
@@ -546,9 +546,7 @@
       <div class="display text-dark anim-2" style="margin-top:16px; font-size:42px; line-height:1.2;">
         We showed up<br/>for each other
       </div>
-      <div class="display text-dark anim-3" id="showed-up-days" style="font-size:96px; line-height:1; margin: 16px 0;">
-        0
-      </div>
+      <div class="display text-dark anim-3" id="showed-up-days" style="font-size:96px; line-height:1; margin: 16px 0; height:96px; display:flex; align-items:center; justify-content:center;">0</div>
       <div class="stat-label text-dark anim-3">days in a row</div>
       <div class="divider-gold anim-4" style="margin: 20px auto;"></div>
       <div class="italic text-dark anim-4" style="color: var(--soft-brown); font-size:20px;">
