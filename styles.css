@@ -593,6 +593,10 @@ html, body {
 }
 
 /* ── ENGAGEMENT SLIDE ── */
+[data-index="25"] {
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
 .engagement-date {
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
