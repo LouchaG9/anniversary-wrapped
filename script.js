@@ -300,6 +300,8 @@ function buildHardGrid() {
     { label: 'Apr', total: 30, startDay: 1, endDay: 18 },
   ];
 
+  let cellIndex = 0;
+
   months.forEach(({ label, total, startDay, endDay }) => {
     const block = document.createElement('div');
     block.className = 'month-block';
@@ -316,6 +318,7 @@ function buildHardGrid() {
       const cell = document.createElement('div');
       if (i >= startDay && i <= endDay) {
         cell.className = 'check-cell done';
+        cell.style.animationDelay = `${cellIndex * 14}ms`;
         const icon = document.createElement('i');
         icon.setAttribute('data-lucide', 'square-check');
         icon.style.cssText = 'width:12px;height:12px;';
@@ -323,6 +326,7 @@ function buildHardGrid() {
       } else {
         cell.className = 'check-cell empty';
       }
+      cellIndex++;
       monthGrid.appendChild(cell);
     }
 
