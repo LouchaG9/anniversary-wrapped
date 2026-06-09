@@ -63,6 +63,7 @@ function goToSlide(index) {
 
   // Special actions
   if (index === 8)  animateApolloStats();
+  if (index === 11) initVerdictSlider();
   if (index === 24) triggerConfetti();
   if (index === 25) updateDaysCounter();
   if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
@@ -165,6 +166,77 @@ const quasoSlider = createSlider({
 });
 
 function revealQuasos() { quasoSlider.reveal(); }
+
+// ── VERDICT SLIDER (slide 11) ──
+let verdictPct = 0.5;
+let verdictInitialised = false;
+
+function initVerdictSlider() {
+  if (verdictInitialised) {
+    // Reset to neutral on each visit
+    document.getElementById('verdict-result').style.display = 'none';
+    document.getElementById('verdict-reveal-btn').style.display = 'inline-flex';
+    updateVerdictUI(0.5);
+    return;
+  }
+  verdictInitialised = true;
+
+  const track     = document.getElementById('verdict-track');
+  const thumb     = document.getElementById('verdict-thumb');
+  const fillLeft  = document.getElementById('verdict-fill-left');
+  const fillRight = document.getElementById('verdict-fill-right');
+  let dragging = false;
+
+  function updateVerdictUI(pct) {
+    pct = Math.max(0, Math.min(1, pct));
+    verdictPct = pct;
+    thumb.style.left = (pct * 100) + '%';
+    fillLeft.style.width  = (pct * 100) + '%';
+    fillRight.style.width = ((1 - pct) * 100) + '%';
+  }
+
+  function pctFromEvent(e) {
+    const rect    = track.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return (clientX - rect.left) / rect.width;
+  }
+
+  updateVerdictUI(0.5);
+
+  thumb.addEventListener('mousedown',  ()  => dragging = true);
+  thumb.addEventListener('touchstart', ()  => dragging = true, { passive: true });
+  track.addEventListener('click',      (e) => updateVerdictUI(pctFromEvent(e)));
+  document.addEventListener('mousemove',  (e) => { if (dragging) updateVerdictUI(pctFromEvent(e)); });
+  document.addEventListener('touchmove',  (e) => { if (dragging) updateVerdictUI(pctFromEvent(e.touches[0])); }, { passive: true });
+  document.addEventListener('mouseup',    ()  => dragging = false);
+  document.addEventListener('touchend',   ()  => dragging = false);
+}
+
+function updateVerdictUI(pct) {
+  pct = Math.max(0, Math.min(1, pct));
+  verdictPct = pct;
+  const thumb     = document.getElementById('verdict-thumb');
+  const fillLeft  = document.getElementById('verdict-fill-left');
+  const fillRight = document.getElementById('verdict-fill-right');
+  if (!thumb) return;
+  thumb.style.left = (pct * 100) + '%';
+  fillLeft.style.width  = (pct * 100) + '%';
+  fillRight.style.width = ((1 - pct) * 100) + '%';
+}
+
+function revealVerdict() {
+  document.getElementById('verdict-reveal-btn').style.display = 'none';
+  const result = document.getElementById('verdict-result');
+  const msg    = document.getElementById('verdict-message');
+  result.style.display = 'block';
+  if (verdictPct < 0.35) {
+    msg.textContent = 'One breakdown, one crash, one very stressful roadside phone call. A fair verdict.';
+  } else if (verdictPct > 0.65) {
+    msg.textContent = 'Zero incidents, just an eye-watering servicing bill. Mechanically perfect, financially painful.';
+  } else {
+    msg.textContent = 'A diplomatic answer. Very on-brand.';
+  }
+}
 
 // ── 75 HARD GRID ──
 function buildHardGrid() {

@@ -296,7 +296,7 @@
        SLIDE 11 — CAR TROUBLES
   ══════════════════════════════════════════ -->
   <div class="slide bg-dark" data-index="11" style="justify-content:flex-start; padding-top:52px;">
-    <div style="width:100%; margin-bottom:16px;">
+    <div style="width:100%; margin-bottom:12px;">
       <div class="section-label text-cream anim-1">Challenges</div>
       <div class="display-sm text-cream anim-2">The Year<br/>in <em>Cars</em> <i data-lucide="car" style="width:28px;height:28px;vertical-align:middle;"></i></div>
     </div>
@@ -306,7 +306,7 @@
         <div class="car-stats">
           <div class="car-stat"><i data-lucide="zap" style="width:16px;height:16px;vertical-align:middle;"></i> 1 breakdown</div>
           <div class="car-stat"><i data-lucide="eye-off" style="width:16px;height:16px;vertical-align:middle;"></i> 1 crash</div>
-          <div class="car-stat"><i data-lucide="alert-circle" style="width:16px;height:16px;vertical-align:middle;"></i> RIP</div>
+          <div class="car-stat"><i data-lucide="wrench" style="width:16px;height:16px;vertical-align:middle;"></i> Fixed</div>
         </div>
       </div>
       <div class="car-card">
@@ -317,8 +317,23 @@
           <div class="car-stat"><i data-lucide="banknote" style="width:16px;height:16px;vertical-align:middle;"></i> $[ # ] servicing</div>
         </div>
       </div>
-      <div class="body text-cream" style="font-size:12px; opacity:0.45; text-align:center; margin-top:8px;">
-        Progress, arguably.
+    </div>
+    <div class="anim-4" style="width:100%; margin-top:14px;">
+      <div style="font-size:11px; font-family:'DM Sans',sans-serif; font-weight:400; letter-spacing:0.08em; text-transform:uppercase; opacity:0.5; color:var(--cream); text-align:center; margin-bottom:10px;">Which caused more trouble?</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="font-size:12px; font-family:'DM Sans',sans-serif; color:var(--cream); opacity:0.7; flex-shrink:0; width:44px; text-align:right;">Mazda</div>
+        <div id="verdict-track" class="slider-track" style="flex:1; height:4px; background:rgba(255,255,255,0.15); border-radius:2px; position:relative; cursor:pointer;">
+          <div id="verdict-fill-left" style="position:absolute; left:0; top:0; height:100%; width:50%; background:rgba(255,255,255,0.4); border-radius:2px 0 0 2px;"></div>
+          <div id="verdict-fill-right" style="position:absolute; right:0; top:0; height:100%; width:50%; background:var(--rose); border-radius:0 2px 2px 0; opacity:0.7;"></div>
+          <div id="verdict-thumb" class="slider-thumb" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:22px; height:22px; background:var(--cream); border-radius:50%; cursor:grab; box-shadow:0 2px 8px rgba(0,0,0,0.4);"></div>
+        </div>
+        <div style="font-size:12px; font-family:'DM Sans',sans-serif; color:var(--rose); flex-shrink:0; width:44px;">Subaru</div>
+      </div>
+      <div style="text-align:center; margin-top:14px;">
+        <button class="reveal-btn" id="verdict-reveal-btn" onclick="revealVerdict()">Cast your verdict</button>
+      </div>
+      <div id="verdict-result" style="display:none; text-align:center; margin-top:12px;">
+        <div class="italic text-cream" id="verdict-message" style="font-size:14px; opacity:0.8; line-height:1.5;"></div>
       </div>
     </div>
   </div>
