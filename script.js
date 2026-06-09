@@ -64,6 +64,7 @@ function goToSlide(index) {
   // Special actions
   if (index === 8)  animateApolloStats();
   if (index === 11) initVerdictSlider();
+  if (index === 23) initPhraseReveal();
   if (index === 25) triggerConfetti();
   if (index === 26) updateDaysCounter();
   if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
@@ -227,6 +228,37 @@ function updateVerdictUI(pct) {
   thumb.style.left = (pct * 100) + '%';
   fillLeft.style.width  = (pct * 100) + '%';
   fillRight.style.width = ((1 - pct) * 100) + '%';
+}
+
+// ── PHRASE REVEAL (slide 23) ──
+function initPhraseReveal() {
+  const container = document.getElementById('phrase-container');
+  container.innerHTML = '';
+  document.getElementById('phrase-reveal-btn').style.display = 'inline-flex';
+  document.getElementById('phrase-divider').style.opacity = '0';
+
+  const lines = ['the beginning of', 'the best chapter yet'];
+  lines.forEach((line) => {
+    const lineEl = document.createElement('div');
+    for (const char of line) {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? ' ' : char;
+      span.style.cssText = 'opacity:0; display:inline-block; transition:opacity 0.12s ease;';
+      lineEl.appendChild(span);
+    }
+    container.appendChild(lineEl);
+  });
+}
+
+function revealPhrase() {
+  document.getElementById('phrase-reveal-btn').style.display = 'none';
+  const spans = document.querySelectorAll('#phrase-container span');
+  spans.forEach((span, i) => {
+    setTimeout(() => { span.style.opacity = '1'; }, i * 70);
+  });
+  setTimeout(() => {
+    document.getElementById('phrase-divider').style.opacity = '1';
+  }, spans.length * 70 + 300);
 }
 
 function revealVerdict() {
