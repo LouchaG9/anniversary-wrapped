@@ -479,7 +479,7 @@ function countUp(el, target, duration) {
 
 function animateApolloStats() {
   countUp(document.getElementById('apollo-walks'), ACTUAL_WALKS, 2500);
-  countUp(document.getElementById('apollo-days'),  365, 2500);
+  countUp(document.getElementById('apollo-days'),  411, 2500);
 }
 
 // ── DAYS COUNTER ──
