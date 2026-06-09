@@ -37,20 +37,26 @@ html, body {
   padding: 40px 28px 80px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transform: translateY(30px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  transform: translateX(0);
   overflow: hidden;
 }
 
 .slide.active {
   opacity: 1;
   pointer-events: all;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
-.slide.exit {
+.slide.exit-left {
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateX(-60px);
+  pointer-events: none;
+}
+
+.slide.exit-right {
+  opacity: 0;
+  transform: translateX(60px);
   pointer-events: none;
 }
 
@@ -490,10 +496,60 @@ html, body {
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 10px;
-  padding: 12px 14px;
+  cursor: pointer;
+  perspective: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.country-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  border-radius: inherit;
+}
+
+.country-card.flipped .country-card-inner {
+  transform: rotateY(180deg);
+}
+
+.country-card-front,
+.country-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   align-items: center;
+}
+
+.country-card-front {
+  padding: 12px 14px;
   gap: 10px;
+}
+
+.country-card-back {
+  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(44,31,20,0.7);
+  justify-content: center;
+  flex-direction: column;
+}
+
+.country-card-back-label {
+  position: absolute;
+  bottom: 7px;
+  left: 10px;
+  font-size: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .country-flag { font-size: 22px; }
@@ -537,6 +593,10 @@ html, body {
 }
 
 /* ── ENGAGEMENT SLIDE ── */
+[data-index="25"] {
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
 .engagement-date {
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
@@ -764,6 +824,15 @@ html, body {
   transform: scale(0.71);
 }
 
+@keyframes checkIn {
+  from { opacity: 0; transform: scale(0.3); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.check-cell.done {
+  animation: checkIn 0.2s ease-out both;
+}
+
 /* ── WORD OF YEAR ── */
 .word-reveal {
   font-family: 'Cormorant Garamond', serif;
@@ -803,7 +872,7 @@ html, body {
   border-color: rgba(44,31,20,0.12);
 }
 
-.bg-gold .country-name {
+.bg-gold .country-card-front .country-name {
   color: var(--deep);
 }
 

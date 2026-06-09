@@ -1,7 +1,8 @@
-const TOTAL_SLIDES = 26;
-const ACTUAL_WALKS = 285;
+const TOTAL_SLIDES = 27;
+const ACTUAL_WALKS = 246;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
+const NZ_DATE = new Date('2026-07-03');
 
 const TRACKS = [
   {
@@ -12,13 +13,13 @@ const TRACKS = [
   },
   {
     url:       'audio/follow-you.mp3',
-    slides:    [9, 10, 11, 12, 13],        // Challenges section
+    slides:    [9, 10, 11, 12, 13, 14],     // Challenges section
     startTime: 60,
     fadeInMs:  2000,
   },
   {
     url:       'audio/beyond.mp3',
-    slides:    [23, 24, 25],                 // Engagement build-up, reveal + final
+    slides:    [24, 25, 26],                 // Engagement build-up, reveal + final
     startTime: 66,
     fadeInMs:  2000,
   },
@@ -45,10 +46,21 @@ function goToSlide(index) {
 
   if (!next_slide) return;
 
-  current_slide.classList.remove('active');
-  current_slide.classList.add('exit');
-  setTimeout(() => current_slide.classList.remove('exit'), 600);
+  const direction   = index > current ? 1 : -1;
+  const exitClass   = direction > 0 ? 'exit-left' : 'exit-right';
+  const enterOffset = direction > 0 ? '60px' : '-60px';
 
+  // Exit current slide in correct direction
+  current_slide.classList.remove('active');
+  current_slide.classList.add(exitClass);
+  setTimeout(() => current_slide.classList.remove(exitClass), 650);
+
+  // Snap incoming slide to start position (no transition), then animate in
+  next_slide.style.transition = 'none';
+  next_slide.style.transform  = `translateX(${enterOffset})`;
+  void next_slide.offsetHeight; // force reflow to commit initial position
+  next_slide.style.transition = '';
+  next_slide.style.transform  = '';
   next_slide.classList.add('active');
 
   document.getElementById(`dot-${current}`)?.classList.remove('active');
@@ -57,14 +69,21 @@ function goToSlide(index) {
   const prevIndex = current;
   current = index;
 
-  const lightSlides = [1, 2, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
+  const lightSlides = [1, 2, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23];
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
   document.getElementById('nav').classList.toggle('dots-hidden', index === 0);
 
   // Special actions
+  if (index === 3)  animateHikingStats();
+  if (index === 5)  animateBoulderingStat();
   if (index === 8)  animateApolloStats();
-  if (index === 24) triggerConfetti();
-  if (index === 25) updateDaysCounter();
+  if (index === 10) initUniTypewriter();
+  if (index === 21) animateShowedUp();
+  if (index === 11) initVerdictSlider();
+  if (index === 18) updateNZCounter();
+  if (index === 23) initPhraseReveal();
+  if (index === 25) triggerConfetti();
+  if (index === 26) updateDaysCounter();
   if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
 
   handleMusicTransition(prevIndex, index);
@@ -76,11 +95,16 @@ function nextSlide() {
 
 // Left half = back, right half = forward (skip interactive elements)
 document.getElementById('app').addEventListener('click', (e) => {
-  const interactive = e.target.closest('.pick-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
+  const interactive = e.target.closest('.pick-card, .country-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
   if (interactive) return;
   if (e.clientX < window.innerWidth / 2) goToSlide(current - 1);
   else goToSlide(current + 1);
 });
+
+// ── INTERACTIVE: COUNTRY FLIP ──
+function flipCountry(card) {
+  card.classList.toggle('flipped');
+}
 
 // ── INTERACTIVE: PICK CARDS ──
 function selectCard(groupId, card) {
@@ -166,6 +190,132 @@ const quasoSlider = createSlider({
 
 function revealQuasos() { quasoSlider.reveal(); }
 
+// ── VERDICT SLIDER (slide 11) ──
+let verdictPct = 0.5;
+let verdictInitialised = false;
+
+function initVerdictSlider() {
+  if (verdictInitialised) {
+    // Reset to neutral on each visit
+    document.getElementById('verdict-result').style.display = 'none';
+    document.getElementById('verdict-reveal-btn').style.display = 'inline-flex';
+    updateVerdictUI(0.5);
+    return;
+  }
+  verdictInitialised = true;
+
+  const track     = document.getElementById('verdict-track');
+  const thumb     = document.getElementById('verdict-thumb');
+  const fillLeft  = document.getElementById('verdict-fill-left');
+  const fillRight = document.getElementById('verdict-fill-right');
+  let dragging = false;
+
+  function updateVerdictUI(pct) {
+    pct = Math.max(0, Math.min(1, pct));
+    verdictPct = pct;
+    thumb.style.left = (pct * 100) + '%';
+    fillLeft.style.width  = (pct * 100) + '%';
+    fillRight.style.width = ((1 - pct) * 100) + '%';
+  }
+
+  function pctFromEvent(e) {
+    const rect    = track.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return (clientX - rect.left) / rect.width;
+  }
+
+  updateVerdictUI(0.5);
+
+  thumb.addEventListener('mousedown',  ()  => dragging = true);
+  thumb.addEventListener('touchstart', ()  => dragging = true, { passive: true });
+  track.addEventListener('click',      (e) => updateVerdictUI(pctFromEvent(e)));
+  document.addEventListener('mousemove',  (e) => { if (dragging) updateVerdictUI(pctFromEvent(e)); });
+  document.addEventListener('touchmove',  (e) => { if (dragging) updateVerdictUI(pctFromEvent(e.touches[0])); }, { passive: true });
+  document.addEventListener('mouseup',    ()  => dragging = false);
+  document.addEventListener('touchend',   ()  => dragging = false);
+}
+
+function updateVerdictUI(pct) {
+  pct = Math.max(0, Math.min(1, pct));
+  verdictPct = pct;
+  const thumb     = document.getElementById('verdict-thumb');
+  const fillLeft  = document.getElementById('verdict-fill-left');
+  const fillRight = document.getElementById('verdict-fill-right');
+  if (!thumb) return;
+  thumb.style.left = (pct * 100) + '%';
+  fillLeft.style.width  = (pct * 100) + '%';
+  fillRight.style.width = ((1 - pct) * 100) + '%';
+}
+
+// ── UNI TYPEWRITER (slide 10) ──
+function initUniTypewriter() {
+  const el = document.getElementById('uni-text');
+  el.innerHTML = '';
+
+  [['Too f***ing'], ['many.']].forEach(([line]) => {
+    const lineEl = document.createElement('div');
+    for (const char of line) {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.cssText = 'opacity:0; display:inline-block; transition:opacity 0.08s ease;';
+      lineEl.appendChild(span);
+    }
+    el.appendChild(lineEl);
+  });
+
+  setTimeout(() => {
+    const spans = el.querySelectorAll('span');
+    spans.forEach((span, i) => {
+      setTimeout(() => { span.style.opacity = '1'; }, i * 55);
+    });
+  }, 350);
+}
+
+// ── PHRASE REVEAL (slide 23) ──
+function initPhraseReveal() {
+  const container = document.getElementById('phrase-container');
+  container.innerHTML = '';
+  document.getElementById('phrase-reveal-btn').style.display = 'inline-flex';
+  document.getElementById('phrase-divider').style.opacity = '0';
+
+  const lines = ['the beginning of', 'the best chapter yet'];
+  lines.forEach((line) => {
+    const lineEl = document.createElement('div');
+    for (const char of line) {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? ' ' : char;
+      span.style.cssText = 'opacity:0; display:inline-block; transition:opacity 0.12s ease;';
+      lineEl.appendChild(span);
+    }
+    container.appendChild(lineEl);
+  });
+}
+
+function revealPhrase() {
+  document.getElementById('phrase-reveal-btn').style.display = 'none';
+  const spans = document.querySelectorAll('#phrase-container span');
+  spans.forEach((span, i) => {
+    setTimeout(() => { span.style.opacity = '1'; }, i * 70);
+  });
+  setTimeout(() => {
+    document.getElementById('phrase-divider').style.opacity = '1';
+  }, spans.length * 70 + 300);
+}
+
+function revealVerdict() {
+  document.getElementById('verdict-reveal-btn').style.display = 'none';
+  const result = document.getElementById('verdict-result');
+  const msg    = document.getElementById('verdict-message');
+  result.style.display = 'block';
+  if (verdictPct < 0.35) {
+    msg.textContent = 'One breakdown, one crash, one very stressful roadside phone call. A fair verdict.';
+  } else if (verdictPct > 0.65) {
+    msg.textContent = 'Zero incidents, just an eye-watering servicing bill. Mechanically perfect, financially painful.';
+  } else {
+    msg.textContent = 'A diplomatic answer. Very on-brand.';
+  }
+}
+
 // ── 75 HARD GRID ──
 function buildHardGrid() {
   const grid = document.getElementById('hard-grid');
@@ -176,6 +326,8 @@ function buildHardGrid() {
     { label: 'Mar', total: 31, startDay: 1, endDay: 31 },
     { label: 'Apr', total: 30, startDay: 1, endDay: 18 },
   ];
+
+  let cellIndex = 0;
 
   months.forEach(({ label, total, startDay, endDay }) => {
     const block = document.createElement('div');
@@ -193,6 +345,7 @@ function buildHardGrid() {
       const cell = document.createElement('div');
       if (i >= startDay && i <= endDay) {
         cell.className = 'check-cell done';
+        cell.style.animationDelay = `${cellIndex * 14}ms`;
         const icon = document.createElement('i');
         icon.setAttribute('data-lucide', 'square-check');
         icon.style.cssText = 'width:12px;height:12px;';
@@ -200,6 +353,7 @@ function buildHardGrid() {
       } else {
         cell.className = 'check-cell empty';
       }
+      cellIndex++;
       monthGrid.appendChild(cell);
     }
 
@@ -296,6 +450,20 @@ function triggerConfetti() {
   }
 }
 
+// ── STAT COUNT-UPS ──
+function animateHikingStats() {
+  countUp(document.getElementById('hike-count'),      15, 1800);
+  countUp(document.getElementById('countries-hiked'),  4, 1400);
+}
+
+function animateBoulderingStat() {
+  countUp(document.getElementById('boulder-sessions'), 57, 2000);
+}
+
+function animateShowedUp() {
+  countUp(document.getElementById('showed-up-days'), 365, 2500);
+}
+
 // ── APOLLO STAT COUNT-UP ──
 function countUp(el, target, duration) {
   const start = performance.now();
@@ -310,11 +478,17 @@ function countUp(el, target, duration) {
 }
 
 function animateApolloStats() {
-  countUp(document.getElementById('apollo-walks'), 285, 2500);
-  countUp(document.getElementById('apollo-days'),  365, 2500);
+  countUp(document.getElementById('apollo-walks'), ACTUAL_WALKS, 2500);
+  countUp(document.getElementById('apollo-days'),  411, 2500);
 }
 
 // ── DAYS COUNTER ──
+function updateNZCounter() {
+  const now  = new Date();
+  const diff = Math.ceil((NZ_DATE - now) / (1000 * 60 * 60 * 24));
+  document.getElementById('nz-days').textContent = diff > 0 ? diff : '0';
+}
+
 function updateDaysCounter() {
   const now = new Date();
   const diff = Math.floor((now - ENGAGEMENT_DATE) / (1000 * 60 * 60 * 24));
