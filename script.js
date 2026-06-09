@@ -76,6 +76,7 @@ function goToSlide(index) {
   if (index === 3)  animateHikingStats();
   if (index === 5)  animateBoulderingStat();
   if (index === 8)  animateApolloStats();
+  if (index === 10) initUniTypewriter();
   if (index === 21) animateShowedUp();
   if (index === 11) initVerdictSlider();
   if (index === 23) initPhraseReveal();
@@ -242,6 +243,30 @@ function updateVerdictUI(pct) {
   thumb.style.left = (pct * 100) + '%';
   fillLeft.style.width  = (pct * 100) + '%';
   fillRight.style.width = ((1 - pct) * 100) + '%';
+}
+
+// ── UNI TYPEWRITER (slide 10) ──
+function initUniTypewriter() {
+  const el = document.getElementById('uni-text');
+  el.innerHTML = '';
+
+  [['Too f***ing'], ['many.']].forEach(([line]) => {
+    const lineEl = document.createElement('div');
+    for (const char of line) {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.cssText = 'opacity:0; display:inline-block; transition:opacity 0.08s ease;';
+      lineEl.appendChild(span);
+    }
+    el.appendChild(lineEl);
+  });
+
+  setTimeout(() => {
+    const spans = el.querySelectorAll('span');
+    spans.forEach((span, i) => {
+      setTimeout(() => { span.style.opacity = '1'; }, i * 55);
+    });
+  }, 350);
 }
 
 // ── PHRASE REVEAL (slide 23) ──
