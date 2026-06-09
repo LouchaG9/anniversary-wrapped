@@ -2,6 +2,7 @@ const TOTAL_SLIDES = 27;
 const ACTUAL_WALKS = 246;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
+const NZ_DATE = new Date('2026-07-03');
 
 const TRACKS = [
   {
@@ -79,6 +80,7 @@ function goToSlide(index) {
   if (index === 10) initUniTypewriter();
   if (index === 21) animateShowedUp();
   if (index === 11) initVerdictSlider();
+  if (index === 18) updateNZCounter();
   if (index === 23) initPhraseReveal();
   if (index === 25) triggerConfetti();
   if (index === 26) updateDaysCounter();
@@ -481,6 +483,12 @@ function animateApolloStats() {
 }
 
 // ── DAYS COUNTER ──
+function updateNZCounter() {
+  const now  = new Date();
+  const diff = Math.ceil((NZ_DATE - now) / (1000 * 60 * 60 * 24));
+  document.getElementById('nz-days').textContent = diff > 0 ? diff : '0';
+}
+
 function updateDaysCounter() {
   const now = new Date();
   const diff = Math.floor((now - ENGAGEMENT_DATE) / (1000 * 60 * 60 * 24));
