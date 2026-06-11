@@ -249,6 +249,7 @@ function updateVerdictUI(pct) {
 }
 
 // ── UNI TYPEWRITER (slide 10) ──
+const NBSP = " ";
 function initUniTypewriter() {
   const el = document.getElementById('uni-text');
   el.innerHTML = '';
@@ -257,8 +258,8 @@ function initUniTypewriter() {
     const lineEl = document.createElement('div');
     for (const char of line) {
       const span = document.createElement('span');
-      span.textContent = char;
-      span.style.cssText = 'opacity:0; display:inline-block; transition:opacity 0.08s ease;';
+      span.textContent = char === ' ' ? ' ' : char;
+      span.style.cssText = char === ' ' ? 'opacity:0; display:inline; white-space:pre; transition:opacity 0.08s ease;' : 'opacity:0; display:inline-block; transition:opacity 0.08s ease;';
       lineEl.appendChild(span);
     }
     el.appendChild(lineEl);
