@@ -1,4 +1,4 @@
-const TOTAL_SLIDES = 27;
+const TOTAL_SLIDES = 26;
 const ACTUAL_WALKS = 246;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
@@ -13,13 +13,13 @@ const TRACKS = [
   },
   {
     url:       'audio/follow-you.mp3',
-    slides:    [9, 10, 11, 12, 13, 14],     // Challenges section
+    slides:    [9, 10, 11, 12, 13],          // Challenges section
     startTime: 60,
     fadeInMs:  2000,
   },
   {
     url:       'audio/beyond.mp3',
-    slides:    [24, 25, 26],                 // Engagement build-up, reveal + final
+    slides:    [23, 24, 25],                 // Engagement build-up, reveal + final
     startTime: 66,
     fadeInMs:  2000,
   },
@@ -69,7 +69,7 @@ function goToSlide(index) {
   const prevIndex = current;
   current = index;
 
-  const lightSlides = [1, 2, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23];
+  const lightSlides = [1, 2, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
   document.getElementById('nav').classList.toggle('dots-hidden', index === 0);
 
@@ -78,14 +78,13 @@ function goToSlide(index) {
   if (index === 5)  animateBoulderingStat();
   if (index === 8)  animateApolloStats();
   if (index === 10) initUniTypewriter();
-  if (index === 21) animateShowedUp();
+  if (index === 20) animateShowedUp();
   if (index === 11) initVerdictSlider();
-  if (index === 18) updateNZCounter();
-  if (index === 23) initPhraseReveal();
-  if (index === 20) initGratitudeStack();
-  if (index === 25) triggerConfetti();
-  if (index === 26) updateDaysCounter();
-  if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
+  if (index === 17) updateNZCounter();
+  if (index === 22) initPhraseReveal();
+  if (index === 19) initGratitudeStack();
+  if (index === 24) triggerConfetti();
+  if (index === 25) updateDaysCounter();
 
   handleMusicTransition(prevIndex, index);
 }
