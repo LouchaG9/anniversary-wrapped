@@ -1,4 +1,4 @@
-const TOTAL_SLIDES = 27;
+const TOTAL_SLIDES = 26;
 const ACTUAL_WALKS = 246;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
@@ -13,13 +13,13 @@ const TRACKS = [
   },
   {
     url:       'audio/follow-you.mp3',
-    slides:    [9, 10, 11, 12, 13, 14],     // Challenges section
+    slides:    [9, 10, 11, 12, 13],          // Challenges section
     startTime: 60,
     fadeInMs:  2000,
   },
   {
     url:       'audio/beyond.mp3',
-    slides:    [24, 25, 26],                 // Engagement build-up, reveal + final
+    slides:    [23, 24, 25],                 // Engagement build-up, reveal + final
     startTime: 66,
     fadeInMs:  2000,
   },
@@ -69,7 +69,7 @@ function goToSlide(index) {
   const prevIndex = current;
   current = index;
 
-  const lightSlides = [1, 2, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23];
+  const lightSlides = [1, 2, 4, 5, 6, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22];
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
   document.getElementById('nav').classList.toggle('dots-hidden', index === 0);
 
@@ -78,14 +78,13 @@ function goToSlide(index) {
   if (index === 5)  animateBoulderingStat();
   if (index === 8)  animateApolloStats();
   if (index === 10) initUniTypewriter();
-  if (index === 21) animateShowedUp();
+  if (index === 20) animateShowedUp();
   if (index === 11) initVerdictSlider();
-  if (index === 18) updateNZCounter();
-  if (index === 23) initPhraseReveal();
-  if (index === 20) initGratitudeStack();
-  if (index === 25) triggerConfetti();
-  if (index === 26) updateDaysCounter();
-  if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
+  if (index === 17) updateNZCounter();
+  if (index === 22) initPhraseReveal();
+  if (index === 19) initGratitudeStack();
+  if (index === 24) triggerConfetti();
+  if (index === 25) updateDaysCounter();
 
   handleMusicTransition(prevIndex, index);
 }
@@ -277,10 +276,9 @@ function initUniTypewriter() {
 function initPhraseReveal() {
   const container = document.getElementById('phrase-container');
   container.innerHTML = '';
-  document.getElementById('phrase-reveal-btn').style.display = 'inline-flex';
   document.getElementById('phrase-divider').style.opacity = '0';
 
-  const lines = ['the beginning of', 'the best chapter yet'];
+  const lines = ['the beginning of', 'our biggest and most', 'exciting chapter ever'];
   lines.forEach((line) => {
     const lineEl = document.createElement('div');
     for (const char of line) {
@@ -291,17 +289,16 @@ function initPhraseReveal() {
     }
     container.appendChild(lineEl);
   });
-}
 
-function revealPhrase() {
-  document.getElementById('phrase-reveal-btn').style.display = 'none';
-  const spans = document.querySelectorAll('#phrase-container span');
-  spans.forEach((span, i) => {
-    setTimeout(() => { span.style.opacity = '1'; }, i * 70);
-  });
   setTimeout(() => {
-    document.getElementById('phrase-divider').style.opacity = '1';
-  }, spans.length * 70 + 300);
+    const spans = container.querySelectorAll('span');
+    spans.forEach((span, i) => {
+      setTimeout(() => { span.style.opacity = '1'; }, i * 70);
+    });
+    setTimeout(() => {
+      document.getElementById('phrase-divider').style.opacity = '1';
+    }, spans.length * 70 + 300);
+  }, 600);
 }
 
 function revealVerdict() {
@@ -481,7 +478,7 @@ function countUp(el, target, duration) {
 
 function animateApolloStats() {
   countUp(document.getElementById('apollo-walks'), ACTUAL_WALKS, 2500);
-  countUp(document.getElementById('apollo-days'),  411, 2500);
+  countUp(document.getElementById('apollo-days'),  365, 2500);
 }
 
 // ── DAYS COUNTER ──
