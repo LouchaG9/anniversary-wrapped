@@ -82,6 +82,7 @@ function goToSlide(index) {
   if (index === 11) initVerdictSlider();
   if (index === 18) updateNZCounter();
   if (index === 23) initPhraseReveal();
+  if (index === 20) initGratitudeStack();
   if (index === 25) triggerConfetti();
   if (index === 26) updateDaysCounter();
   if (index === 12) { buildHardGrid(); lucideInit(document.getElementById('hard-grid')); }
@@ -95,7 +96,7 @@ function nextSlide() {
 
 // Left half = back, right half = forward (skip interactive elements)
 document.getElementById('app').addEventListener('click', (e) => {
-  const interactive = e.target.closest('.pick-card, .country-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
+  const interactive = e.target.closest('.pick-card, .country-card, .gratitude-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
   if (interactive) return;
   if (e.clientX < window.innerWidth / 2) goToSlide(current - 1);
   else goToSlide(current + 1);
@@ -509,6 +510,75 @@ function lucideInit(root) {
 }
 
 lucideInit();
+
+// ── GRATITUDE STACK ──
+let _gratDrag = null;
+
+function initGratitudeStack() {
+  _gratDrag = null;
+  document.querySelectorAll('.gratitude-card').forEach(c => {
+    c.classList.remove('dismissed');
+    c.style.transition = 'none';
+    c.style.transform  = `translate(-50%, -50%) rotate(${c.dataset.rot}deg)`;
+    c.style.opacity    = '1';
+    c.style.zIndex     = c.dataset.z;
+  });
+  const hint = document.getElementById('gratitude-hint');
+  if (hint) hint.style.opacity = '0.4';
+}
+
+function _gratStart(e, card) {
+  if (card.classList.contains('dismissed')) return;
+  const alive = [...document.querySelectorAll('.gratitude-card:not(.dismissed)')];
+  if (!alive.length) return;
+  const top = alive.reduce((a, b) => +a.dataset.z > +b.dataset.z ? a : b);
+  if (top !== card) return;
+  const pt = e.touches ? e.touches[0] : e;
+  _gratDrag = { card, sx: pt.clientX, sy: pt.clientY, cx: 0, cy: 0, baseRot: parseFloat(card.dataset.rot) || 0 };
+  card.style.transition = 'none';
+  if (e.cancelable) e.preventDefault();
+}
+
+document.addEventListener('mousemove', function(e) {
+  if (!_gratDrag) return;
+  _gratDrag.cx = e.clientX - _gratDrag.sx;
+  _gratDrag.cy = e.clientY - _gratDrag.sy;
+  const rot = _gratDrag.baseRot + _gratDrag.cx * 0.07;
+  _gratDrag.card.style.transform = `translate(calc(-50% + ${_gratDrag.cx}px), calc(-50% + ${_gratDrag.cy}px)) rotate(${rot}deg)`;
+});
+
+document.addEventListener('touchmove', function(e) {
+  if (!_gratDrag) return;
+  const pt = e.touches[0];
+  _gratDrag.cx = pt.clientX - _gratDrag.sx;
+  _gratDrag.cy = pt.clientY - _gratDrag.sy;
+  const rot = _gratDrag.baseRot + _gratDrag.cx * 0.07;
+  _gratDrag.card.style.transform = `translate(calc(-50% + ${_gratDrag.cx}px), calc(-50% + ${_gratDrag.cy}px)) rotate(${rot}deg)`;
+  e.preventDefault();
+}, { passive: false });
+
+document.addEventListener('mouseup',  _gratEnd);
+document.addEventListener('touchend', _gratEnd);
+
+function _gratEnd() {
+  if (!_gratDrag) return;
+  const { card, cx, cy, baseRot } = _gratDrag;
+  _gratDrag = null;
+  if (Math.hypot(cx, cy) > 80) {
+    const angle   = Math.atan2(cy, cx);
+    const tx      = Math.cos(angle) * 700;
+    const ty      = Math.sin(angle) * 700;
+    const finalRot = baseRot + cx * 0.25;
+    card.style.transition = 'transform 0.5s cubic-bezier(0.55,0,1,0.45), opacity 0.35s ease 0.1s';
+    card.style.transform  = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${finalRot}deg)`;
+    card.style.opacity    = '0';
+    document.getElementById('gratitude-hint')?.style && (document.getElementById('gratitude-hint').style.opacity = '0');
+    setTimeout(() => card.classList.add('dismissed'), 500);
+  } else {
+    card.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+    card.style.transform  = `translate(-50%, -50%) rotate(${baseRot}deg)`;
+  }
+}
 
 // ── KEYBOARD NAV ──
 document.addEventListener('keydown', (e) => {

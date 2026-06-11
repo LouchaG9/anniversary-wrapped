@@ -525,20 +525,21 @@
        SLIDE 19 — GRATITUDE
   ══════════════════════════════════════════ -->
   <div class="slide bg-cream" data-index="20">
-    <div style="text-align:center; width:100%; margin-bottom:14px;">
+    <div style="width:100%; margin-bottom:8px;">
       <div class="section-label text-dark anim-1" style="opacity:0.5;">Highlights</div>
       <div class="display-sm text-dark anim-2" style="margin-top:10px; font-size:32px; line-height:1.2;">
         We were grateful<br/>for <em>a lot.</em>
       </div>
     </div>
-    <div class="anim-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; width:100%;">
-      <div class="photo-slot photo-xs"><div class="photo-label text-dark">[ photo ]</div></div>
-      <div class="photo-slot photo-xs"><div class="photo-label text-dark">[ photo ]</div></div>
-      <div class="photo-slot photo-xs"><div class="photo-label text-dark">[ photo ]</div></div>
-      <div class="photo-slot photo-xs"><div class="photo-label text-dark">[ photo ]</div></div>
-      <div class="photo-slot photo-xs"><div class="photo-label text-dark">[ photo ]</div></div>
-      <div class="photo-slot photo-xs"><div class="photo-label text-dark">[ photo ]</div></div>
+    <div id="gratitude-stack" class="anim-3" style="position:relative; flex:1; width:100%; min-height:200px;">
+      <div class="gratitude-card" data-rot="1.5"  data-z="1" style="z-index:1;  transform:translate(-50%,-50%) rotate(1.5deg);"  onmousedown="_gratStart(event,this)" ontouchstart="_gratStart(event,this)"><img src="images/gratitude-1.png" draggable="false"></div>
+      <div class="gratitude-card" data-rot="-3"   data-z="2" style="z-index:2;  transform:translate(-50%,-50%) rotate(-3deg);"   onmousedown="_gratStart(event,this)" ontouchstart="_gratStart(event,this)"><img src="images/gratitude-2.png" draggable="false"></div>
+      <div class="gratitude-card" data-rot="2.5"  data-z="3" style="z-index:3;  transform:translate(-50%,-50%) rotate(2.5deg);"  onmousedown="_gratStart(event,this)" ontouchstart="_gratStart(event,this)"><img src="images/gratitude-3.png" draggable="false"></div>
+      <div class="gratitude-card" data-rot="-1.5" data-z="4" style="z-index:4;  transform:translate(-50%,-50%) rotate(-1.5deg);" onmousedown="_gratStart(event,this)" ontouchstart="_gratStart(event,this)"><img src="images/gratitude-4.png" draggable="false"></div>
+      <div class="gratitude-card" data-rot="3"    data-z="5" style="z-index:5;  transform:translate(-50%,-50%) rotate(3deg);"    onmousedown="_gratStart(event,this)" ontouchstart="_gratStart(event,this)"><img src="images/gratitude-5.png" draggable="false"></div>
+      <div class="gratitude-card" data-rot="-2"   data-z="6" style="z-index:6;  transform:translate(-50%,-50%) rotate(-2deg);"   onmousedown="_gratStart(event,this)" ontouchstart="_gratStart(event,this)"><img src="images/gratitude-6.png" draggable="false"></div>
     </div>
+    <div id="gratitude-hint" style="text-align:center; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.1em; text-transform:uppercase; color:var(--deep); opacity:0; margin-bottom:4px; transition:opacity 0.6s ease;">drag to reveal</div>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -632,8 +633,8 @@
       <div class="photo-slot" style="overflow:hidden;">
         <img src="images/engagement-2.jpg" style="width:100%; height:100%; object-fit:cover;">
       </div>
-      <div class="photo-slot">
-        <div class="photo-label" style="color:var(--cream); opacity:0.3;">[ photo 3 ]</div>
+      <div class="photo-slot" style="overflow:hidden;">
+        <img src="images/engagement-3.jpg" style="width:100%; height:100%; object-fit:cover;">
       </div>
     </div>
   </div>
