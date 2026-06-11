@@ -276,10 +276,9 @@ function initUniTypewriter() {
 function initPhraseReveal() {
   const container = document.getElementById('phrase-container');
   container.innerHTML = '';
-  document.getElementById('phrase-reveal-btn').style.display = 'inline-flex';
   document.getElementById('phrase-divider').style.opacity = '0';
 
-  const lines = ['the beginning of', 'the best chapter yet'];
+  const lines = ['the beginning of', 'our biggest and most', 'exciting chapter ever'];
   lines.forEach((line) => {
     const lineEl = document.createElement('div');
     for (const char of line) {
@@ -290,17 +289,16 @@ function initPhraseReveal() {
     }
     container.appendChild(lineEl);
   });
-}
 
-function revealPhrase() {
-  document.getElementById('phrase-reveal-btn').style.display = 'none';
-  const spans = document.querySelectorAll('#phrase-container span');
-  spans.forEach((span, i) => {
-    setTimeout(() => { span.style.opacity = '1'; }, i * 70);
-  });
   setTimeout(() => {
-    document.getElementById('phrase-divider').style.opacity = '1';
-  }, spans.length * 70 + 300);
+    const spans = container.querySelectorAll('span');
+    spans.forEach((span, i) => {
+      setTimeout(() => { span.style.opacity = '1'; }, i * 70);
+    });
+    setTimeout(() => {
+      document.getElementById('phrase-divider').style.opacity = '1';
+    }, spans.length * 70 + 300);
+  }, 600);
 }
 
 function revealVerdict() {
