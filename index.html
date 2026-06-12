@@ -78,23 +78,25 @@
   ══════════════════════════════════════════ -->
   <div class="slide" data-index="3" style="background-image: url('images/hiking.jpg'); background-size: 150%; background-position: center; background-color: var(--deep);">
     <div class="hero-overlay"></div>
-    <div style="width:100%; position:absolute; bottom:100px; left:0; z-index:2; padding:0 28px;">
-      <div class="section-label text-cream anim-1">Quality Time</div>
-      <div class="display text-cream anim-2" style="font-size:48px; line-height:1.1;">
-        A year of<br/><em>hiking.</em>
-      </div>
-      <div class="anim-3" style="margin-top:20px; background:rgba(0,0,0,0.35); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-radius:16px; border:1px solid rgba(255,255,255,0.12); padding:16px 20px;">
-        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
-          <span class="stat-row-label" style="color:var(--cream);">Hikes completed</span>
-          <span class="stat-row-value" id="hike-count" style="min-width:2.5ch; display:inline-block; text-align:right;">0</span>
+    <div style="position:absolute; inset:0 0 80px 0; display:flex; align-items:center; justify-content:center; z-index:2; padding:0 28px;">
+      <div class="anim-1" style="width:100%; background:rgba(0,0,0,0.35); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-radius:16px; border:1px solid rgba(255,255,255,0.12); padding:24px 20px;">
+        <div class="section-label text-cream" style="margin-bottom:10px;">Quality Time</div>
+        <div class="display text-cream anim-2" style="font-size:48px; line-height:1.1; margin-bottom:16px;">
+          A year of<br/><em>hiking.</em>
         </div>
-        <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
-          <span class="stat-row-label" style="color:var(--cream);">Total distance</span>
-          <span class="stat-row-value">138.03 km</span>
-        </div>
-        <div class="stat-row" style="border-bottom:none;">
-          <span class="stat-row-label" style="color:var(--cream);">Countries hiked in</span>
-          <span class="stat-row-value" id="countries-hiked" style="min-width:1.5ch; display:inline-block; text-align:right;">0</span>
+        <div class="anim-3" style="border-top:1px solid rgba(245,239,230,0.15); padding-top:12px;">
+          <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+            <span class="stat-row-label" style="color:var(--cream);">Hikes completed</span>
+            <span class="stat-row-value" id="hike-count" style="min-width:2.5ch; display:inline-block; text-align:right;">0</span>
+          </div>
+          <div class="stat-row" style="border-bottom-color:rgba(245,239,230,0.15);">
+            <span class="stat-row-label" style="color:var(--cream);">Total distance</span>
+            <span class="stat-row-value">138.03 km</span>
+          </div>
+          <div class="stat-row" style="border-bottom:none;">
+            <span class="stat-row-label" style="color:var(--cream);">Countries hiked in</span>
+            <span class="stat-row-value" id="countries-hiked" style="min-width:1.5ch; display:inline-block; text-align:right;">0</span>
+          </div>
         </div>
       </div>
     </div>
@@ -353,7 +355,7 @@
         <div class="pill">Home cooked meals only</div>
         <div class="pill">Delete social media</div>
       </div>
-      <div class="body text-cream" style="font-size:11px; opacity:0.55; margin-top:14px;">*with some creative rule interpretation</div>
+      <div class="body text-cream rules-disclaimer" style="font-size:11px; opacity:0.55; margin-top:14px;">*with some creative rule interpretation</div>
     </div>
   </div>
 
@@ -490,7 +492,6 @@
         <div id="nz-days" style="font-family:'Cormorant Garamond',serif; font-size:72px; font-weight:300; line-height:1; color:var(--deep);">—</div>
         <div style="font-family:'DM Sans',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.1em; text-transform:uppercase; opacity:0.6; color:var(--deep); margin-top:6px;">days away</div>
       </div>
-      <div class="pill pill-dark anim-5" style="margin-top:16px; display:inline-flex;"><i data-lucide="plane" style="width:16px;height:16px;vertical-align:middle;"></i> Already booked</div>
     </div>
   </div>
 
@@ -556,20 +557,6 @@
       <div class="divider anim-3" style="background:var(--deep);"></div>
       <div class="body text-dark anim-3" style="opacity:0.65;">Getting older together.<br/>Wouldn't have it any other way.</div>
     </div>
-    <div class="anim-4" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; margin-top:20px;">
-      <div>
-        <div class="photo-slot photo-sm">
-          <div class="photo-label text-dark">[ your birthday photo ]</div>
-        </div>
-        <div class="body text-dark" style="font-size:11px; text-align:center; margin-top:6px; opacity:0.5;">You</div>
-      </div>
-      <div>
-        <div class="photo-slot photo-sm">
-          <div class="photo-label text-dark">[ her birthday photo ]</div>
-        </div>
-        <div class="body text-dark" style="font-size:11px; text-align:center; margin-top:6px; opacity:0.5;">Her</div>
-      </div>
-    </div>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -609,14 +596,14 @@
         We got<br/><em style="color:var(--warm-gold);">engaged.</em> <i data-lucide="gem" style="width:28px;height:28px;vertical-align:middle;color:var(--warm-gold);"></i>
       </div>
     </div>
-    <div class="engagement-photos anim-2">
-      <div class="photo-slot" style="grid-column: 1/-1; overflow:hidden;">
+    <div class="engagement-photos">
+      <div class="photo-slot anim-2" style="grid-column: 1/-1; overflow:hidden;">
         <img src="images/engagement-1.png" style="width:100%; height:100%; object-fit:cover;">
       </div>
-      <div class="photo-slot" style="overflow:hidden;">
+      <div class="photo-slot anim-3" style="overflow:hidden;">
         <img src="images/engagement-2.jpg" style="width:100%; height:100%; object-fit:cover;">
       </div>
-      <div class="photo-slot" style="overflow:hidden;">
+      <div class="photo-slot anim-4" style="overflow:hidden;">
         <img src="images/engagement-3.jpg" style="width:100%; height:100%; object-fit:cover;">
       </div>
     </div>

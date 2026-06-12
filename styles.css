@@ -923,6 +923,8 @@ html, body {
 .slide.active .rules-list .pill:nth-child(6) { animation: fadeUp 0.4s ease 1.15s both; }
 .slide.active .rules-list .pill:nth-child(7) { animation: fadeUp 0.4s ease 1.30s both; }
 .slide.active .rules-list .pill:nth-child(8) { animation: fadeUp 0.4s ease 1.45s both; }
+.rules-disclaimer { opacity: 0; }
+.slide.active .rules-disclaimer { animation: fadeUp 0.4s ease 1.65s both; }
 
 /* ── GRATITUDE STACK ── */
 .gratitude-card {
