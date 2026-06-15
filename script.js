@@ -13,7 +13,7 @@ const TRACKS = [
   },
   {
     url:       'audio/follow-you.mp3',
-    slides:    [9, 10, 11, 12, 13],          // Challenges section
+    slides:    [9, 10, 11, 12, 13, 14],       // Challenges section
     startTime: 60,
     fadeInMs:  2000,
   },
