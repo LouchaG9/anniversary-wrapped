@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Anniversary Wrapped** — a Spotify Wrapped-style interactive anniversary gift delivered as a set of three co-located files (`index.html`, `styles.css`, `script.js`). No build step, no package manager, no dev server. Open `index.html` directly in a browser. All three files must stay in the same directory for the HTML's relative links to resolve.
+**Anniversary Wrapped** — a Spotify Wrapped-style interactive anniversary gift delivered as a set of co-located files (`index.html`, `styles.css`, `script.js`, plus `images/` and `audio/`). No build step, no package manager, no dev server. Open `index.html` directly in a browser. All files must stay in the same directory for the HTML's relative links (CSS, JS, images, audio) to resolve.
 
-> **Note:** The project started as a single self-contained HTML file. CSS and JS were later separated into `styles.css` and `script.js` (linked via `<link>` and `<script src="...">`). If the gift needs to be a truly self-contained single file for distribution, inline `styles.css` inside a `<style>` tag and `script.js` inside a `<script>` tag in the HTML before delivery.
+> **Note:** The project started as a single self-contained HTML file. CSS and JS were later separated into `styles.css` and `script.js` (linked via `<link>` and `<script src="...">`). If the gift needs to be a truly self-contained single file for distribution, inline `styles.css` inside a `<style>` tag and `script.js` inside a `<script>` tag — but note that local `images/` and `audio/` assets still need to ship alongside it.
 
 ---
 
@@ -14,43 +14,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | File | Purpose |
 |---|---|
-| `index.html` | All 24 slide HTML (558 lines). Links to `styles.css` and `script.js`. |
+| `index.html` | All 26 slide HTML (slides 0–25). Links to `styles.css` and `script.js`; loads Lucide icons from a CDN. |
 | `styles.css` | CSS variables, component styles, animations, responsive breakpoints. |
-| `script.js` | JS globals, `goToSlide`, interactive mechanics (sliders, pick cards), confetti, counter. |
-| `PRD.txt` | Product requirements document — full slide deck spec and open items list. |
+| `script.js` | JS globals, `goToSlide`, interactive mechanics (sliders, pick cards, country flip, gratitude stack), audio player, confetti, count-ups, Lucide init. |
+| `images/` | All photos and country thumbnails (`images/countries/*.jpg`). |
+| `audio/` | Three background music tracks, swapped per section. |
+| `PRD.txt` | Product requirements document — original slide deck spec and open-items list (now largely complete; historical reference). |
 
 ---
 
 ## Slide Inventory
 
-24 slides (index 0–23), each `<div class="slide [bg-class]" data-index="N">`.
+26 slides (`data-index` 0–25), each `<div class="slide [bg-class]" data-index="N">`. Several slides use a full-bleed background photo (with `.hero-overlay`) rather than a `bg-*` class.
 
-| Index | Title | Background | Type |
+| Index | Title | Background | Type / Mechanic |
 |---|---|---|---|
-| 0 | Title | `bg-cream` | Static — hero photo, "11 Years of Us" |
-| 1 | Section: Quality Time | `bg-blush` | Section header |
-| 2 | NYT Games | `bg-dark` | Static — Wordle 103 days, Spelling Bee, Crossword |
-| 3 | Hikes | `bg-dark` | **Pick card** — Opera Hut / Ocean & Sea / Zermatt |
-| 4 | Bouldering | `bg-rose` | Static — `[ # ]` sessions, Blue grade |
-| 5 | Op Shop Finds | `bg-dark` | **Pick card** — Dining Table / TCM Poster Frame |
-| 6 | Quasos | `bg-gold` | **Slider** — guess 0–200, reveals `ACTUAL_QUASOS` |
-| 7 | Dog Walks | `bg-blush` | **Slider** — guess 0–800, reveals `ACTUAL_WALKS` |
-| 8 | Dog Parents | `bg-cream` | Static — `[ # ]` days, dog photo |
-| 9 | Section: Challenges | `bg-dark` | Section header |
-| 10 | Uni / Study | `bg-dark` | Static — humorous |
-| 11 | Car Troubles | `bg-dark` | Static — Mazda vs Subaru, `[ # ]` Subaru servicing cost |
-| 12 | 75 Hard | `bg-rose` | Dynamic — `buildHardGrid()` generates 75 checkmark cells |
-| 13 | Veganism | `bg-cream` | Static — milestone |
-| 14 | Section: Travel | `bg-blush` | Section header — "8 countries. Counting." |
-| 15 | Countries Grid | `bg-dark` | Static — 8 country cards (IT, CH, AT, DE, SI, IE, FR, JP) |
-| 16 | New Zealand Teaser | `bg-gold` | Static — "Coming Soon, Country #9" |
-| 17 | Section: Highlights | `bg-dark` | Section header |
-| 18 | Showed Up 365 | `bg-cream` | Static — large "365" centred |
-| 19 | Turning 31 | `bg-blush` | Static — 2 birthday photos side by side |
-| 20 | Word of the Year | `bg-dark` | Static — `[ word ]` reveal |
-| 21 | Engagement Build-up | `bg-engagement` | Static — teaser |
-| 22 | Engagement Reveal | `bg-engagement` | Dynamic — `triggerConfetti()` on entry |
-| 23 | Final Slide | `bg-engagement` | Dynamic — `updateDaysCounter()` on entry, "Year 12 →" button |
+| 0 | Title | `images/hero.jpg` (deep fallback) | Static — "The 11th year of us", `begin-btn` → slide 1 |
+| 1 | Section: Quality Time | `bg-cream` | Section header (number 1) |
+| 2 | NYT Games | `images/nyt-games.jpg` | Static — Connections/Wordle streaks, favourite game, crossword |
+| 3 | Hike Stats | `images/hiking.jpg` | Count-up — `animateHikingStats()` (hikes 15, countries 4), 138.03 km |
+| 4 | Hikes | `bg-cream` | **Pick card** — Schäfler / Oeschinensee / Olpererhutte |
+| 5 | Bouldering | `bg-cream` | Count-up — `animateBoulderingStat()` (57 sessions), hardest grade Blue |
+| 6 | Op Shop Finds | `bg-cream` | **Pick card** — Dining Table / TCM Poster Frame / Markers / Monopoly |
+| 7 | Quasos | `bg-cream` | **Slider** — guess 0–200, reveals `ACTUAL_QUASOS` |
+| 8 | Dog (Apollo) | `images/Apollo.jpg` | Count-up — `animateApolloStats()` (walks `ACTUAL_WALKS`, 365 days) |
+| 9 | Section: Challenges | `bg-dark` | Section header (number 2) |
+| 10 | Uni / Study | `bg-dark` | Typewriter — `initUniTypewriter()` reveals "Too f***ing many." |
+| 11 | Car Troubles | `bg-dark` | **Verdict slider** — Mazda vs Subaru, `revealVerdict()` |
+| 12 | 75 Hard | `bg-dark` | Static — "75 Hard. Done.", rules pills, dates 2 Feb → 18 Apr 2026 |
+| 13 | Veganism | `bg-dark` | Static — milestone |
+| 14 | Injury Report | `bg-dark` | Static — humorous |
+| 15 | Section: Travel | `bg-gold` | Section header (number 3) |
+| 16 | Countries Grid | `bg-gold` | **Flip cards** — 8 countries (IT, CH, AT, DE, SI, IE, FR, JP), `flipCountry()` |
+| 17 | New Zealand Teaser | `bg-gold` | Countdown — `updateNZCounter()` to `NZ_DATE` |
+| 18 | Section: Highlights | `bg-blush` | Section header (number 4) |
+| 19 | Gratitude | `bg-blush` | **Drag stack** — `initGratitudeStack()`, swipe post-its away to reveal `#gratitude-phrase` |
+| 20 | Showed Up 365 | `bg-blush` | Count-up — `animateShowedUp()` (365 days in a row) |
+| 21 | Turning 31 | `bg-blush` | Static — text only |
+| 22 | Phrase of the Year | `bg-blush` | Reveal — `initPhraseReveal()` types out a phrase |
+| 23 | Engagement Build-up | `bg-engagement` | Static — teaser |
+| 24 | Engagement Reveal | `bg-engagement` | Dynamic — `triggerConfetti()` on entry, 3 photos |
+| 25 | Final Slide | `bg-engagement` | Dynamic — `updateDaysCounter()` on entry, closing message |
 
 ---
 
@@ -69,24 +73,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 --text-dark:   #2C1F14
 ```
 
-**Rule:** Never introduce colours outside this palette. Use the CSS variables, not hex literals.
+**Rule:** Never introduce colours outside this palette. Use the CSS variables, not hex literals. (The `bg-*` gradients below are the one exception — they hardcode lightened/darkened stops of the palette colours.)
 
 ### Background Classes → Slides
 
 | Class | Style | Used on slides |
 |---|---|---|
-| `.bg-cream` | Solid cream | 0, 8, 13, 18 |
-| `.bg-blush` | Gradient 160° (light→medium blush) | 1, 7, 14, 19 |
-| `.bg-dark` | Gradient 160° (deep→soft-brown) | 2, 3, 5, 9, 10, 11, 15, 17, 20 |
-| `.bg-rose` | Gradient 160° (rose→dark) | 4, 12 |
-| `.bg-gold` | Gradient 160° (warm-gold→muted) | 6, 16 |
-| `.bg-engagement` | Gradient 160° (very dark) | 21, 22, 23 |
+| `.bg-cream` | Solid cream | 1, 4, 5, 6, 7 |
+| `.bg-blush` | Gradient 160° (blush → deeper blush) | 18, 19, 20, 21, 22 |
+| `.bg-dark` | Gradient 160° (deep → warm brown) | 9, 10, 11, 12, 13, 14 |
+| `.bg-gold` | Gradient 160° (warm-gold → darker gold) | 15, 16, 17 |
+| `.bg-rose` | Gradient 160° (rose → darker rose) | (defined; not currently used) |
+| `.bg-deep-rose` | Gradient 160° (deep rust red) | (defined; not currently used) |
+| `.bg-engagement` | Gradient 160° (very dark) | 23, 24, 25 |
+| _photo background_ | Inline `background-image` + `.hero-overlay` | 0, 2, 3, 8 |
 
 ### Animation System
 
-**Slide transitions** (opacity + translateY):
-- Enter (`.slide.active`): `translateY(30px→0)`, `opacity 0→1`, 0.6s ease
-- Exit (`.slide.exit`): `translateY(0→-30px)`, `opacity 1→0`, 0.6s ease
+**Slide transitions** (horizontal slide, direction-aware) — set in `goToSlide()`:
+- Incoming slide snaps to `translateX(±60px)` then animates to `0` with `.active`.
+- Outgoing slide gets `.exit-left` (forward) or `.exit-right` (back), cleaned up after 650ms.
 
 **Child stagger** — add `.anim-N` to elements in order (1–5); they animate with `fadeUp` on slide activation:
 
@@ -98,41 +104,35 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `.anim-4` | 0.55s |
 | `.anim-5` | 0.70s |
 
-**Confetti:** `.confetti-piece` elements use `confettiFall` keyframe (fall 100vh + rotate 720°, 2–4s, self-remove after 4s).
+**Confetti:** `.confetti-piece` elements use `confettiFall` keyframe (fall + rotate, 2–4s, self-remove after 4s). Colours: `['#C9A96E', '#E8C9B8', '#C97B63', '#F5EFE6', '#fff']`.
+
+### Icons
+
+Lucide icons are written as `<i data-lucide="name">` and converted to inline SVG on load by `lucideInit()` in `script.js` (each SVG inherits the `<i>`'s inline `style`). Loaded via the unpkg CDN `<script>` in the `<head>`. Use kebab-case Lucide names.
 
 ### Typography Classes
 
-| Class | Font | Size | Weight |
-|---|---|---|---|
-| `.display` | Cormorant Garamond | 52px | 300 |
-| `.display-sm` | Cormorant Garamond | 38px | 300 |
-| `.stat-number` | Cormorant Garamond | 88px | 300 |
-| `.stat-label` | DM Sans | 13px | 400, uppercase |
-| `.body` | DM Sans | 15px | 300 |
-| `.section-label` | DM Sans | 10px | 400, uppercase |
-| `.italic` | Cormorant Garamond italic | 22px | 300 |
-| `.word-reveal` | Cormorant Garamond italic | 72px | 300 |
-| `.live-counter` | Cormorant Garamond | 72px | 300 (gold) |
+| Class | Font | Notes |
+|---|---|---|
+| `.display` / `.display-sm` | Cormorant Garamond | Headlines (per-slide font-size overrides are common inline) |
+| `.stat-number` | Cormorant Garamond | Large numerals |
+| `.stat-label` | DM Sans | Small uppercase label |
+| `.body` | DM Sans | Body copy |
+| `.section-label` | DM Sans | Tiny uppercase eyebrow |
+| `.italic` | Cormorant Garamond italic | Pull quotes |
+| `.word-reveal` | Cormorant Garamond italic | Phrase-of-the-year reveal |
+| `.live-counter` | Cormorant Garamond | Days-since counter (gold) |
+| `.section-div-title` / `.section-div-number` | Cormorant Garamond | Section header title + big background numeral |
 
 Color utilities: `.text-cream`, `.text-dark`, `.text-gold`, `.text-rose`.
 
-### Photo Slots
-
-Replace `<div class="photo-slot [photo-hero|photo-sm|photo-xs]">` with `<img>` when adding photos:
-
-| Size class | Height |
-|---|---|
-| `.photo-hero` | 240px |
-| `.photo-sm` | 140px |
-| `.photo-xs` | 100px |
-
 ### Responsive Breakpoint
 
-`@media (max-height: 700px)` — reduces font sizes and photo heights for small screens. Only one breakpoint; all other sizing is relative or fixed.
+`@media (max-height: 700px)` — reduces font sizes and photo heights for small screens.
 
 ### Slide Layout
 
-Slides use `position: absolute; padding: 40px 28px 80px` (80px bottom reserves space for the nav bar). All content must fit in the viewport — no overflow/scroll.
+Slides use `position: absolute` with bottom padding reserving space for the nav bar. All content must fit in the viewport — no overflow/scroll. `overflow: hidden` is the law.
 
 ---
 
@@ -141,141 +141,137 @@ Slides use `position: absolute; padding: 40px 28px 80px` (80px bottom reserves s
 ### Global State & Constants
 
 ```javascript
-const TOTAL_SLIDES = 24;
-const ACTUAL_WALKS = 0;        // ← fill in before gifting
-const ACTUAL_QUASOS = 0;       // ← fill in before gifting
+const TOTAL_SLIDES = 26;
+const ACTUAL_WALKS   = 246;
+const ACTUAL_QUASOS  = 151;
 const ENGAGEMENT_DATE = new Date('2025-09-15');
+const NZ_DATE         = new Date('2026-07-03');
+const TRACKS = [ /* audio config, see below */ ];
 let current = 0;               // current slide index
 ```
 
 ### Navigation
 
 **`goToSlide(index)`** — central navigation function:
-1. Bounds-checks `index` (0 ≤ index < 24)
-2. Removes `.active` from current slide, adds `.exit` (cleaned up after 600ms)
-3. Adds `.active` to target slide, updates `current`
-4. Updates progress dots (`.active` class on `#dot-N`)
-5. Checks `lightSlides` array to apply/remove `.dark` class on nav buttons
-6. Shows/hides `#prev-btn` and `#next-btn` at bounds
-7. Fires side effects for special slides:
-   - Slide 12: `buildHardGrid()` (once)
-   - Slide 22: `triggerConfetti()`
-   - Slide 23: `updateDaysCounter()`
+1. Bounds-checks `index` (0 ≤ index < `TOTAL_SLIDES`).
+2. Computes direction from `current`, applies `.exit-left`/`.exit-right` to the old slide and the horizontal enter animation to the new one.
+3. Updates `current` and the progress dots (`.active` on `#dot-N`).
+4. Toggles `nav-dark` on `#nav` for light-background slides (see `lightSlides`), and `dots-hidden` on slide 0.
+5. Fires per-slide side effects (count-ups, typewriters, slider/stack init, confetti, counters).
+6. Calls `handleMusicTransition(prevIndex, index)` to cross-fade audio between sections.
 
 **`lightSlides` array** (inside `goToSlide`):
 ```javascript
-const lightSlides = [0, 6, 8, 13, 14, 19];
+const lightSlides = [1, 4, 5, 6, 7, 15, 16, 17, 18, 19, 20, 21, 22];
 ```
-These slides have light backgrounds and need dark-coloured nav button text. **Update this array if adding slides with `bg-cream`, `bg-blush`, or `bg-gold` backgrounds.**
+These slides get `nav-dark` (dark-coloured nav dots/button) because their backgrounds are light enough at the bottom. The full-bleed photo slides (0, 2, 3, 8) are deliberately **excluded** — their `.hero-overlay` darkens the bottom, so they keep the default light dots (which also carry a subtle `box-shadow` for legibility on any photo). **Update this array if adding or reordering slides.**
+
+**Per-slide side effects** (the `if (index === N)` block in `goToSlide`):
+
+| Index | Call |
+|---|---|
+| 3 | `animateHikingStats()` |
+| 5 | `animateBoulderingStat()` |
+| 8 | `animateApolloStats()` |
+| 10 | `initUniTypewriter()` |
+| 11 | `initVerdictSlider()` |
+| 17 | `updateNZCounter()` |
+| 19 | `initGratitudeStack()` |
+| 20 | `animateShowedUp()` |
+| 22 | `initPhraseReveal()` |
+| 24 | `triggerConfetti()` |
+| 25 | `updateDaysCounter()` |
 
 **Navigation inputs:**
-- Tap/click on `#app` (excluding interactive elements) → `nextSlide()`
-- `←` / `→` arrow keys and `Space` → `goToSlide(current ± 1)`
-- `#prev-btn` / `#next-btn` buttons
+- Click/tap on `#app`: **left half** → previous slide, **right half** → next slide. Interactive elements are excluded via a `closest()` guard (`.pick-card, .country-card, .gratitude-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn`).
+- `←` / `→` arrow keys and `Space` (right/Space = next, left = back).
+- The title slide's `begin-btn` calls `goToSlide(1)` directly.
+
+### Audio Player
+
+Background music is a single reused `Audio` element (`bgAudio`, looping) that swaps `src` per section and cross-fades on section boundaries.
+
+**`TRACKS`** — array of `{ url, slides, startTime, fadeInMs }`:
+
+| Track | Slides | File |
+|---|---|---|
+| Opening / Quality Time | 1–8 | `audio/loving-is-easy.mp3` |
+| Challenges | 9–14 | `audio/follow-you.mp3` |
+| Engagement + Final | 23–25 | `audio/beyond.mp3` |
+
+Slides not covered by any track (0, 15–22) play no music — `handleMusicTransition` fades the current track out on entry.
+
+Key functions: `_trackForSlide()`, `_fadeTo(target, ms, onDone)`, `_startTrack()`, `_stopTrack()`, `handleMusicTransition(prev, next)`, `toggleMute()` (the `#mute-btn` in the nav), `_updateMuteBtn()`. The mute button is hidden whenever no track is active. Autoplay failures are caught and silently disable music.
 
 ### Interactive: Pick Cards
 
-**`selectCard(groupId, card)`** — called via `onclick="selectCard('groupId', this)"`:
-- Finds all `.pick-card` inside `#groupId`
-- Removes `.selected` / `.not-selected` from all
-- Sets all to `.not-selected`, then sets clicked card to `.selected`
-- The `.check-mark` child becomes visible via CSS on `.selected`
+**`selectCard(groupId, card)`** — sets all `.pick-card` in `#groupId` to `.not-selected`, then the clicked one to `.selected` (its `.check-mark` shows via CSS). Used on slides 4 (hikes) and 6 (op shop).
 
-**HTML pattern:**
-```html
-<div class="pick-grid" id="[groupId]">
-  <div class="pick-card" onclick="selectCard('[groupId]', this)">
-    <div class="pick-card-photo">...</div>
-    <div class="pick-card-inner">
-      <div class="pick-emoji">🏔️</div>
-      <div>
-        <div class="pick-card-label">Label</div>
-        <div class="pick-card-sub">Subtitle</div>
-      </div>
-    </div>
-    <div class="check-mark">✓</div>
-  </div>
-</div>
-```
+### Interactive: Country Flip
+
+**`flipCountry(card)`** — toggles `.flipped` on a `.country-card` (CSS 3D flip to reveal a photo on the back). Used on slide 16.
 
 ### Interactive: Sliders
 
-**`createSlider(config)`** — factory; returns `{ reveal() }`. Called once per slider at init.
+**`createSlider(config)`** — factory; returns `{ reveal() }`. Config: `{ max, actual, closeMsg, underMsg, overMsg, fillColor, trackId, thumbId, fillId, displayId, revealBtnId, revealResultId, revealMessageId }`. On `reveal()` it hides the button, writes `actual` into the result's `.stat-number`, and picks a message based on the guess vs. `actual` (`closeMsg` if within 5, otherwise `underMsg`/`overMsg`; `{v}` in a message is replaced with the guess).
 
-Config object:
-```javascript
-{
-  max:            800,          // max value
-  actual:         ACTUAL_WALKS, // answer (0 = not yet filled in)
-  nearThreshold:  80,           // diff within which "near" message fires
-  closeMsg:       "...",        // shown when diff ≤ 5
-  nearMsg:        "...",        // shown when diff ≤ nearThreshold
-  fillColor:      "...",        // optional CSS color for fill bar
-  // DOM IDs:
-  trackId, thumbId, fillId, displayId,
-  revealBtnId, revealResultId, revealMessageId
-}
-```
+- `quasoSlider` (slide 7) — max 200, `fillColor: var(--deep)`. Wrapper `revealQuasos()`.
 
-Slider instances:
-- `walksSlider` (slide 7) — max 800, threshold 80
-- `quasoSlider` (slide 6) — max 200, threshold 10, `fillColor: var(--deep)`
+> The previous `walksSlider` is gone — dog walks are now a count-up on slide 8, not a guess.
 
-Wrapper functions `revealWalks()` and `revealQuasos()` delegate to the respective slider's `.reveal()`.
+### Interactive: Verdict Slider (slide 11)
 
-### Special Mechanics
+A bespoke two-sided slider (Mazda ↔ Subaru), separate from `createSlider`. `initVerdictSlider()` wires drag/click on first visit and resets to neutral on re-entry; `updateVerdictUI(pct)` moves the thumb and the two fills; `revealVerdict()` shows a message based on which side the thumb leans.
 
-**`buildHardGrid()`** — runs once on slide 12 entry; generates 75 `.check-cell.done` divs in `#hard-grid`.
+### Interactive: Gratitude Stack (slide 19)
 
-**`triggerConfetti()`** — runs on slide 22 entry; creates 40 `.confetti-piece` elements with random position, rotation, and duration (2–4s); each self-removes after 4s. Colors: `['#C9A96E', '#E8C9B8', '#C97B63', '#F5EFE6', '#fff']`.
+A draggable stack of post-it `.gratitude-card`s. `initGratitudeStack()` resets every card to its base rotation/z-index on entry. `_gratStart`/`_gratEnd` plus document-level `mousemove`/`touchmove` handlers let the user drag the top card; dragging past ~80px throws it off-screen and marks it `.dismissed`, otherwise it springs back.
 
-**`updateDaysCounter()`** — runs on slide 23 entry; calculates `Math.floor((now - ENGAGEMENT_DATE) / 86400000)` and writes to `#days-counter`. Shows `—` if result < 0.
+### Text Reveals
 
-### Progress Dots
+- **`initUniTypewriter()`** (slide 10) — fades in "Too f***ing many." character by character.
+- **`initPhraseReveal()`** (slide 22) — fades in the phrase of the year ("the beginning of our biggest and most exciting chapter ever") char by char, then reveals a divider.
 
-Built dynamically at script init: 24 `.dot` divs appended to `#progress-dots`, each with `id="dot-N"`. The active dot is wider (18px), less rounded (3px border-radius); inactive dots are small (5px), circular, 30% opacity.
+### Count-ups
+
+**`countUp(el, target, duration)`** — ease-out cubic numeric count-up. Used by `animateHikingStats()` (15 hikes, 4 countries), `animateBoulderingStat()` (57), `animateApolloStats()` (`ACTUAL_WALKS`, 365 days), `animateShowedUp()` (365).
+
+### Counters
+
+- **`updateNZCounter()`** (slide 17) — days **until** `NZ_DATE` (`Math.ceil`), written to `#nz-days`; shows `0` if past.
+- **`updateDaysCounter()`** (slide 25) — days **since** `ENGAGEMENT_DATE` (`Math.floor`), written to `#days-counter`; shows `—` if not yet.
+
+### Confetti
+
+**`triggerConfetti()`** (slide 24) — spawns 40 `.confetti-piece` elements with random position/rotation/duration into `#engagement-slide`; each self-removes after 4s.
+
+### Dead / legacy code
+
+**`buildHardGrid()`** is still defined but **no longer called** — slide 12 (75 Hard) is now a static list of rule pills, not a generated checkmark grid. Safe to ignore or remove.
+
+### Progress Dots & Nav
+
+Built at init: `TOTAL_SLIDES` `.dot` divs appended to `#progress-dots`, each `id="dot-N"`. The nav bar (`#nav`) holds the dots and the `#mute-btn`. `dots-hidden` hides the dots (slide 0); `nav-dark` darkens nav elements over light slides.
 
 ---
 
-## Placeholders — Complete List
+## Placeholders / Content Status
 
-All items below must be filled before gifting.
+The deck is essentially fully populated. Notable runtime-filled spots that *look* like placeholders but are **not** TODOs:
+- `#quaso-slider-display` shows `[ — ]` and the reveal `.stat-number` shows `[ # ]` in the static HTML — both are overwritten by `createSlider` at runtime.
 
-### In `script.js`
+Real values now live in code: `ACTUAL_WALKS = 246`, `ACTUAL_QUASOS = 151`. Photos (hero, NYT, hiking, Apollo, hikes, op-shop finds, country thumbnails, gratitude post-its, engagement ×3) are all wired to files in `images/`.
 
-| Constant | Default | Replace with |
-|---|---|---|
-| `ACTUAL_WALKS` | `0` | Total dog walks this year |
-| `ACTUAL_QUASOS` | `0` | Total quasos eaten this year |
-
-### In `anniversary-wrapped.html`
-
-| Slide | Pattern | Replace with |
-|---|---|---|
-| 0 | `[ your opening line ]` in title | One-sentence opening |
-| 4 | `[ # ]` sessions | Bouldering sessions count |
-| 8 | `[ # ]` days | Days as dog parents |
-| 11 | `$[ # ]` | Subaru servicing cost |
-| 12 | `[ Start date ] → [ End date ]` | 75 Hard start and end dates |
-| 20 | `[ word ]` | Word of the year |
-| 23 | `[ your closing message here ]` | Closing message |
-
-### Photo Slots (replace `<div class="photo-slot">` with `<img>`)
-
-| Slide | Label | Photo needed |
-|---|---|---|
-| 0 | `[ hero photo ]` | Couple hero photo |
-| 8 | `[ dog photo ]` | Dog photo |
-| 19 | `[ your birthday photo ]` / `[ her birthday photo ]` | Two birthday photos |
-| 22 | Three engagement photo slots | Engagement photos (×3) |
+If re-gifting for a different year, the things to refresh are: the two `ACTUAL_*` constants, `ENGAGEMENT_DATE` / `NZ_DATE`, the `TRACKS` files, all `images/`, and the per-slide copy (stats, dates, closing message on slide 25).
 
 ---
 
 ## Design Constraints
 
-- **No scroll** — all content must fit the viewport on each slide. `overflow: hidden` is the law.
-- **Palette only** — use CSS variables; no hex literals or colours outside the warm cream/blush/rose/gold/deep family.
-- **Google Fonts only** — Cormorant Garamond (serif, display/italic) and DM Sans (sans, body/labels). No other fonts.
-- **Stagger animations** — assign `.anim-1` through `.anim-5` to slide children in visual order. Animations fire on `.slide.active`, so they replay on every visit.
-- **Light slides** — update the `lightSlides` array in `goToSlide()` whenever adding a slide with `bg-cream`, `bg-blush`, or `bg-gold` background.
-- **Mobile-first** — default to a single-column layout; use a 2-column grid sparingly (photos, country cards).
+- **No scroll** — all content must fit the viewport on each slide. `overflow: hidden`.
+- **Palette only** — use CSS variables; no colours outside the warm cream/blush/rose/gold/deep family.
+- **Google Fonts only** — Cormorant Garamond (serif, display/italic) and DM Sans (sans, body/labels). Lucide for icons.
+- **Stagger animations** — assign `.anim-1`…`.anim-5` to slide children in visual order. They replay on every visit.
+- **Light slides** — update the `lightSlides` array in `goToSlide()` whenever adding/reordering slides with light backgrounds.
+- **Audio sections** — if you add or reorder slides, update each track's `slides` array in `TRACKS` so the music still matches the sections.
+- **Mobile-first** — default to a single-column layout; use grids sparingly (pick cards, country cards).

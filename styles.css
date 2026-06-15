@@ -119,6 +119,7 @@ html, body {
   height: 5px;
   border-radius: 50%;
   background: rgba(255,255,255,0.3);
+  box-shadow: 0 0 2px rgba(0,0,0,0.35);
   transition: all 0.3s ease;
 }
 
@@ -562,35 +563,77 @@ html, body {
 }
 
 /* ── CAR CARD ── */
-.car-card {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  padding: 16px 18px;
+.car-ledger {
   width: 100%;
-  margin-bottom: 10px;
 }
 
-.car-name {
+.car-ledger-head,
+.car-ledger-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 1fr;
+  align-items: center;
+}
+
+.car-ledger-head {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(245,239,230,0.2);
+}
+
+.ledger-car {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 400;
-  color: white;
-  margin-bottom: 10px;
+  line-height: 1;
 }
+.ledger-car.mazda  { text-align: center; color: var(--cream); }
+.ledger-car.subaru { text-align: center; color: var(--rose); }
 
-.car-stats {
+.car-ledger-row {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(245,239,230,0.09);
+}
+.car-ledger-row:last-child { border-bottom: none; }
+
+.ledger-metric {
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 0 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,239,230,0.42);
+  white-space: nowrap;
 }
 
-.car-stat {
-  background: rgba(255,255,255,0.1);
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.75);
+.ledger-val {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: 'DM Sans', sans-serif;
+}
+.ledger-val.mazda  { align-items: center; }
+.ledger-val.subaru { align-items: center; }
+
+.ledger-val .num {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(245,239,230,0.92);
+}
+.ledger-val .num.zero { color: rgba(245,239,230,0.35); }
+.ledger-val .num.gold {
+  font-size: 19px;
+  color: var(--warm-gold);
+}
+.ledger-val .amt {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(245,239,230,0.5);
+  white-space: nowrap;
 }
 
 /* ── ENGAGEMENT SLIDE ── */
