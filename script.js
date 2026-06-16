@@ -107,7 +107,7 @@ function nextSlide() {
 
 // Left half = back, right half = forward (skip interactive elements)
 document.getElementById('app').addEventListener('click', (e) => {
-  const interactive = e.target.closest('.pick-card, .country-card, .gratitude-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn');
+  const interactive = e.target.closest('.pick-card, .country-card, .gratitude-card, .slider-thumb, .slider-track, .reveal-btn, .year-12-btn, .begin-btn, .back-to-start-btn');
   if (interactive) return;
   if (e.clientX < window.innerWidth / 2) goToSlide(current - 1);
   else goToSlide(current + 1);
