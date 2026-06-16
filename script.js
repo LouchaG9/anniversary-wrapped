@@ -18,6 +18,18 @@ const TRACKS = [
     fadeInMs:  2000,
   },
   {
+    url:       'audio/the-great-escape.mp3',
+    slides:    [15, 16, 17],                 // Travel section
+    startTime: 36,
+    fadeInMs:  2000,
+  },
+  {
+    url:       'audio/potion.mp3',
+    slides:    [18, 19, 20, 21, 22],         // Highlights section
+    startTime: 0,
+    fadeInMs:  2000,
+  },
+  {
     url:       'audio/beyond.mp3',
     slides:    [23, 24, 25],                 // Engagement build-up, reveal + final
     startTime: 66,
