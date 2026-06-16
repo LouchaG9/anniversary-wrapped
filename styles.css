@@ -474,7 +474,7 @@ html, body {
 }
 
 .reveal-btn:active { transform: scale(0.97); }
-.reveal-btn:disabled { opacity: 0.4; }
+.reveal-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .reveal-result {
   text-align: center;

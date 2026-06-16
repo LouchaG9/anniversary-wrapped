@@ -127,8 +127,13 @@ function createSlider({ max, actual, trackId, thumbId, fillId, displayId, reveal
 
   if (fillColor) fill.style.background = fillColor;
 
+  const btn = document.getElementById(revealBtnId);
+  btn.disabled = true;
+
   let value    = 0;
   let dragging = false;
+
+  function enableBtn() { btn.disabled = false; }
 
   function update(pct) {
     pct = Math.max(0, Math.min(1, pct));
@@ -146,9 +151,9 @@ function createSlider({ max, actual, trackId, thumbId, fillId, displayId, reveal
 
   update(0.5);
 
-  thumb.addEventListener('mousedown',  ()  => dragging = true);
-  thumb.addEventListener('touchstart', ()  => dragging = true, { passive: true });
-  track.addEventListener('click',      (e) => update(pctFromEvent(e)));
+  thumb.addEventListener('mousedown',  ()  => { dragging = true; enableBtn(); });
+  thumb.addEventListener('touchstart', ()  => { dragging = true; enableBtn(); }, { passive: true });
+  track.addEventListener('click',      (e) => { update(pctFromEvent(e)); enableBtn(); });
 
   document.addEventListener('mousemove',  (e) => { if (dragging) update(pctFromEvent(e)); });
   document.addEventListener('touchmove',  (e) => { if (dragging) update(pctFromEvent(e.touches[0])); }, { passive: true });
@@ -195,20 +200,26 @@ let verdictPct = 0.5;
 let verdictInitialised = false;
 
 function initVerdictSlider() {
+  const verdictBtn = document.getElementById('verdict-reveal-btn');
+
   if (verdictInitialised) {
     // Reset to neutral on each visit
     document.getElementById('verdict-result').style.display = 'none';
-    document.getElementById('verdict-reveal-btn').style.display = 'inline-flex';
+    verdictBtn.style.display = 'inline-flex';
+    verdictBtn.disabled = true;
     updateVerdictUI(0.5);
     return;
   }
   verdictInitialised = true;
+  verdictBtn.disabled = true;
 
   const track     = document.getElementById('verdict-track');
   const thumb     = document.getElementById('verdict-thumb');
   const fillLeft  = document.getElementById('verdict-fill-left');
   const fillRight = document.getElementById('verdict-fill-right');
   let dragging = false;
+
+  function enableVerdictBtn() { verdictBtn.disabled = false; }
 
   function updateVerdictUI(pct) {
     pct = Math.max(0, Math.min(1, pct));
@@ -226,9 +237,9 @@ function initVerdictSlider() {
 
   updateVerdictUI(0.5);
 
-  thumb.addEventListener('mousedown',  ()  => dragging = true);
-  thumb.addEventListener('touchstart', ()  => dragging = true, { passive: true });
-  track.addEventListener('click',      (e) => updateVerdictUI(pctFromEvent(e)));
+  thumb.addEventListener('mousedown',  ()  => { dragging = true; enableVerdictBtn(); });
+  thumb.addEventListener('touchstart', ()  => { dragging = true; enableVerdictBtn(); }, { passive: true });
+  track.addEventListener('click',      (e) => { updateVerdictUI(pctFromEvent(e)); enableVerdictBtn(); });
   document.addEventListener('mousemove',  (e) => { if (dragging) updateVerdictUI(pctFromEvent(e)); });
   document.addEventListener('touchmove',  (e) => { if (dragging) updateVerdictUI(pctFromEvent(e.touches[0])); }, { passive: true });
   document.addEventListener('mouseup',    ()  => dragging = false);
@@ -293,12 +304,12 @@ function initPhraseReveal() {
   setTimeout(() => {
     const spans = container.querySelectorAll('span');
     spans.forEach((span, i) => {
-      setTimeout(() => { span.style.opacity = '1'; }, i * 70);
+      setTimeout(() => { span.style.opacity = '1'; }, i * 35);
     });
     setTimeout(() => {
       document.getElementById('phrase-divider').style.opacity = '1';
-    }, spans.length * 70 + 300);
-  }, 600);
+    }, spans.length * 35 + 200);
+  }, 300);
 }
 
 function revealVerdict() {
