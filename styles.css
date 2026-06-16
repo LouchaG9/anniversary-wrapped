@@ -570,7 +570,7 @@ html, body {
 .car-ledger-head,
 .car-ledger-row {
   display: grid;
-  grid-template-columns: 1fr 120px 1fr;
+  grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
   align-items: center;
 }
 
@@ -619,15 +619,42 @@ html, body {
 .ledger-val.subaru { align-items: center; }
 
 .ledger-val .num {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 300;
   line-height: 1;
   color: rgba(245,239,230,0.92);
 }
 .ledger-val .num.zero { color: rgba(245,239,230,0.35); }
-.ledger-val .num.gold {
-  font-size: 19px;
+
+.car-ledger-total {
+  border-top: 1px solid rgba(245,239,230,0.2);
+  padding-top: 12px;
+  margin-top: 2px;
+}
+
+.ledger-total-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,239,230,0.42);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.ledger-total-row {
+  display: flex;
+}
+
+.ledger-total-amt {
+  flex: 1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
   color: var(--warm-gold);
+  text-align: center;
 }
 .ledger-val .amt {
   font-size: 11px;
