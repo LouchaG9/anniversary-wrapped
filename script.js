@@ -26,7 +26,7 @@ const TRACKS = [
   {
     url:       'audio/potion.mp3',
     slides:    [18, 19, 20, 21, 22],         // Highlights section
-    startTime: 0,
+    startTime: 41,
     fadeInMs:  2000,
   },
   {
