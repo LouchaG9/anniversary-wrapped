@@ -89,7 +89,7 @@ function goToSlide(index) {
   if (index === 3)  animateHikingStats();
   if (index === 5)  animateBoulderingStat();
   if (index === 6)  animateYogaStat();
-  if (index === 9)  animateApolloStats();
+  if (index === 9)  { animateApolloStats(); triggerChickens(); }
   if (index === 11) initUniTypewriter();
   if (index === 21) animateShowedUp();
   if (index === 12) initVerdictSlider();
@@ -470,6 +470,26 @@ function triggerConfetti() {
       slide.appendChild(piece);
       setTimeout(() => piece.remove(), 4000);
     }, i * 40);
+  }
+}
+
+// ── CHICKENS ──
+function triggerChickens() {
+  const slide = document.getElementById('apollo-slide');
+  for (let i = 0; i < 30; i++) {
+    setTimeout(() => {
+      const piece = document.createElement('div');
+      piece.textContent = '🐔';
+      piece.style.cssText = `
+        position:absolute; top:-40px; font-size:${24 + Math.random() * 20}px;
+        left:${Math.random() * 100}%; pointer-events:none; z-index:10;
+        animation:confettiFall ${2 + Math.random() * 2}s ease-in forwards;
+        animation-delay:${Math.random() * 0.4}s;
+        transform:rotate(${Math.random() * 360}deg);
+      `;
+      slide.appendChild(piece);
+      setTimeout(() => piece.remove(), 4000);
+    }, i * 50);
   }
 }
 
