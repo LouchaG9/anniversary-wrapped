@@ -496,13 +496,12 @@ function triggerChickens() {
 // ── STAT COUNT-UPS ──
 function animateHikingStats() {
   countUp(document.getElementById('hike-count'),      15, 1800);
-  countUp(document.getElementById('countries-hiked'),  4, 1400);
+  countUp(document.getElementById('countries-hiked'),  5, 1400);
 }
 
 function animateBoulderingStat() {
   const el = document.getElementById('boulder-sessions');
   countUp(el, 57, 2000);
-  setTimeout(() => { el.textContent = '57ish'; }, 2000);
 }
 
 function animateYogaStat() {
