@@ -479,7 +479,9 @@ function animateHikingStats() {
 }
 
 function animateBoulderingStat() {
-  countUp(document.getElementById('boulder-sessions'), 57, 2000);
+  const el = document.getElementById('boulder-sessions');
+  countUp(el, 57, 2000);
+  setTimeout(() => { el.textContent = '57ish'; }, 2000);
 }
 
 function animateShowedUp() {
