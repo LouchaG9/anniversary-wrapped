@@ -1,4 +1,4 @@
-const TOTAL_SLIDES = 26;
+const TOTAL_SLIDES = 27;
 const ACTUAL_WALKS = 246;
 const ACTUAL_QUASOS = 151; // Replace with your number
 const ENGAGEMENT_DATE = new Date('2025-09-15');
@@ -7,31 +7,31 @@ const NZ_DATE = new Date('2026-07-03');
 const TRACKS = [
   {
     url:       'audio/loving-is-easy.mp3',
-    slides:    [1, 2, 3, 4, 5, 6, 7, 8],  // Opening / Quality Time section
+    slides:    [1, 2, 3, 4, 5, 6, 7, 8, 9],  // Opening / Quality Time section
     startTime: 0,
     fadeInMs:  3000,
   },
   {
     url:       'audio/follow-you.mp3',
-    slides:    [9, 10, 11, 12, 13, 14],       // Challenges section
+    slides:    [10, 11, 12, 13, 14, 15],      // Challenges section
     startTime: 60,
     fadeInMs:  2000,
   },
   {
     url:       'audio/the-great-escape.mp3',
-    slides:    [15, 16, 17],                 // Travel section
+    slides:    [16, 17, 18],                 // Travel section
     startTime: 36,
     fadeInMs:  2000,
   },
   {
     url:       'audio/potion.mp3',
-    slides:    [18, 19, 20, 21, 22],         // Highlights section
+    slides:    [19, 20, 21, 22, 23],         // Highlights section
     startTime: 41,
     fadeInMs:  2000,
   },
   {
     url:       'audio/beyond.mp3',
-    slides:    [23, 24, 25],                 // Engagement build-up, reveal + final
+    slides:    [24, 25, 26],                 // Engagement build-up, reveal + final
     startTime: 66,
     fadeInMs:  2000,
   },
@@ -81,22 +81,23 @@ function goToSlide(index) {
   const prevIndex = current;
   current = index;
 
-  const lightSlides = [1, 4, 5, 6, 7, 15, 16, 17, 18, 19, 20, 22];
+  const lightSlides = [1, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 23];
   document.getElementById('nav').classList.toggle('nav-dark', lightSlides.includes(index));
   document.getElementById('nav').classList.toggle('dots-hidden', index === 0);
 
   // Special actions
   if (index === 3)  animateHikingStats();
   if (index === 5)  animateBoulderingStat();
-  if (index === 8)  animateApolloStats();
-  if (index === 10) initUniTypewriter();
-  if (index === 20) animateShowedUp();
-  if (index === 11) initVerdictSlider();
-  if (index === 17) updateNZCounter();
-  if (index === 22) initPhraseReveal();
-  if (index === 19) initGratitudeStack();
-  if (index === 24) triggerConfetti();
-  if (index === 25) updateDaysCounter();
+  if (index === 6)  animateYogaStat();
+  if (index === 9)  animateApolloStats();
+  if (index === 11) initUniTypewriter();
+  if (index === 21) animateShowedUp();
+  if (index === 12) initVerdictSlider();
+  if (index === 18) updateNZCounter();
+  if (index === 23) initPhraseReveal();
+  if (index === 20) initGratitudeStack();
+  if (index === 25) triggerConfetti();
+  if (index === 26) updateDaysCounter();
 
   handleMusicTransition(prevIndex, index);
 }
@@ -482,6 +483,10 @@ function animateBoulderingStat() {
   const el = document.getElementById('boulder-sessions');
   countUp(el, 57, 2000);
   setTimeout(() => { el.textContent = '57ish'; }, 2000);
+}
+
+function animateYogaStat() {
+  countUp(document.getElementById('yoga-sessions'), 92, 2000);
 }
 
 function animateShowedUp() {
