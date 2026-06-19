@@ -20,7 +20,7 @@ const TRACKS = [
   {
     url:       'audio/lover.mp3',
     slides:    [16, 17, 18],                 // Travel section
-    startTime: 0,
+    startTime: 20,
     fadeInMs:  2000,
   },
   {
