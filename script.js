@@ -18,9 +18,9 @@ const TRACKS = [
     fadeInMs:  2000,
   },
   {
-    url:       'audio/the-great-escape.mp3',
+    url:       'audio/lover.mp3',
     slides:    [16, 17, 18],                 // Travel section
-    startTime: 36,
+    startTime: 0,
     fadeInMs:  2000,
   },
   {
